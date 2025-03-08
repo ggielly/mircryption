@@ -1,0 +1,7 @@
+Updated 2/14/05
+ to deal properly with keys having % in them.
+ Happy valentines day.
+
+Updated 4/13/05
+ blackdevl found bug in config.h that prevented mircryption compilation when BLOCKDNS was set
+

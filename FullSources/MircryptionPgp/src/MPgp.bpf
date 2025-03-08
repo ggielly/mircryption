@@ -1,0 +1,14 @@
+USEUNIT("MPgpMain.cpp");
+USEUNIT("DerivedJobs.cpp");
+USEUNIT("JobManager.cpp");
+USEUNIT("Jobs.cpp");
+USEFORM("LogFormUnit.cpp", LogForm);
+USEUNIT("MiscUtils.cpp");
+USEFORM("OptionsFormUnit.cpp", OptionsForm);
+USEFORM("PgpDialogUnit.cpp", PgpDialogForm);
+USEFORM("QuestionFormUnit.cpp", QuestionForm);
+USEFORM("JobFormUnit.cpp", JobForm);
+//---------------------------------------------------------------------------
+This file is used by the project manager only and should be treated like the project file
+
+DllMain

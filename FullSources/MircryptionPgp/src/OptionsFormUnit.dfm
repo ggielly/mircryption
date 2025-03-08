@@ -1,0 +1,478 @@
+object OptionsForm: TOptionsForm
+  Left = 368
+  Top = 242
+  Width = 428
+  Height = 347
+  Caption = 'MPGP Options'
+  Color = clBtnFace
+  Constraints.MaxHeight = 347
+  Constraints.MinHeight = 347
+  Constraints.MinWidth = 428
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  PrintScale = poNone
+  OnHide = FormHide
+  PixelsPerInch = 96
+  TextHeight = 13
+  object LogButton: TSpeedButton
+    Left = 82
+    Top = 291
+    Width = 25
+    Height = 24
+    Hint = 'Toggle display of debug log'
+    Anchors = [akRight, akBottom]
+    Glyph.Data = {
+      36030000424D3603000000000000360000002800000010000000100000000100
+      1800000000000003000000000000000000000000000000000000FFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFF7F7F7FFFFFFF7F7F7FFFFFFFFFFFFFFFFFFF7F
+      7F7FFFFFFF7F7F7FFFFFFFFFFFFFBFBFBFBFBFBFFFFFFFFFFFFFFFFFFF7F7F7F
+      7F7F7F7F7F7F7F7F7FFFFFFF7F7F7F7F7F7F7F7F7F7F7F7FFFFFFFBFBFBF6060
+      60505050FFFFFFFFFFFF7F7F7FFFFFFF7F7F7FFFFFFF7F7F7FFFFFFF7F7F7FFF
+      FFFF7F7F7FFFFFFF3F3F3F606060808080BFBFBFFFFFFFFFFFFF7F7F7FFFFFFF
+      BFBFBFFFFFFFBFBFBF7F7F7FBFBFBFFFFFFFBFBFBFBFBFBF404040808080BFBF
+      BFFFFFFFFFFFFFFFFFFFBFBFBFFFFFFFFFFFFFFFFFFF9F9F9F0000009F9F9FFF
+      FFFFBFBFBF606060505050BFBFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      BFBFBF404040606060404040606060404040404040808080BFBFBFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFBFBFBF6060605F5F5FBFBFBFFFFFFFBFBFBF5F
+      5F5F6060607F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F7F
+      404040FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5050506F6F6FFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFF4040407F7F7FBFBFBFFFFFFFFFFFFFFFFFFFFF
+      FFFF7F7F7F606060FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF404040
+      7F7F7F7F7F7F7F7F7FFFFFFFFFFFFFFFFFFF7F7F7F606060FFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFF6060605F5F5FBFBFBFBFBFBF7F7F7FFFFFFFFF
+      FFFF6F6F6F606060FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F7F
+      808080BFBFBFBFBFBFFFFFFFFFFFFFBFBFBF9090907F7F7FFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F6F6F9090906F6F6F7F7F7F6F6F6F90
+      90906F6F6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFF7F7F7F8080806060608080807F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+    OnClick = LogButtonClick
+  end
+  object NewAnonymousKeyButton: TSpeedButton
+    Left = 138
+    Top = 291
+    Width = 25
+    Height = 24
+    Hint = '(re)Make a new Anonymous Keypair'
+    Anchors = [akRight, akBottom]
+    Glyph.Data = {
+      36010000424D3601000000000000760000002800000011000000100000000100
+      040000000000C000000000000000000000001000000000000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00DDDDDDDDDDD8
+      DDDDDD000000DDDDDDDDDDD8DDDDDD000000DDDDDDDD8D333D8DDD000000DDDD
+      DDDDD88833DDDD000000DDDDDDD887BB8388DD000000DDDDDDDDD8FB83DDDD00
+      0000DD000DDD8D878D8DDD000000D08830DDDDD8DDDDDD0000000BBB8300D0D8
+      DDDDDD0000000FFFB83B0B070DDDDD0000000F8FB838888880DDDD0000000F88
+      BB3BBBBBB0DDDD0000000FFBBB0000000DDDDD000000D0FFB0DDDDDDDDDDDD00
+      0000DD000DDDDDDDDDDDDD000000DDDDDDDDDDDDDDDDDD000000}
+    OnClick = NewAnonymousKeyButtonClick
+  end
+  object KeyManagerButton: TSpeedButton
+    Left = 167
+    Top = 291
+    Width = 25
+    Height = 24
+    Hint = 'Launch Key Manager Tool'
+    Anchors = [akRight, akBottom]
+    Glyph.Data = {
+      36050000424D3605000000000000360400002800000010000000100000000100
+      0800000000000001000000000000000000000001000000000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000C0DCC000F0CA
+      A60004040400080808000C0C0C0011111100161616001C1C1C00222222002929
+      2900555555004D4D4D004242420039393900807CFF005050FF009300D600FFEC
+      CC00C6D6EF00D6E7E70090A9AD000000330000006600000099000000CC000033
+      00000033330000336600003399000033CC000033FF0000660000006633000066
+      6600006699000066CC000066FF00009900000099330000996600009999000099
+      CC000099FF0000CC000000CC330000CC660000CC990000CCCC0000CCFF0000FF
+      660000FF990000FFCC00330000003300330033006600330099003300CC003300
+      FF00333300003333330033336600333399003333CC003333FF00336600003366
+      330033666600336699003366CC003366FF003399000033993300339966003399
+      99003399CC003399FF0033CC000033CC330033CC660033CC990033CCCC0033CC
+      FF0033FF330033FF660033FF990033FFCC0033FFFF0066000000660033006600
+      6600660099006600CC006600FF00663300006633330066336600663399006633
+      CC006633FF00666600006666330066666600666699006666CC00669900006699
+      330066996600669999006699CC006699FF0066CC000066CC330066CC990066CC
+      CC0066CCFF0066FF000066FF330066FF990066FFCC00CC00FF00FF00CC009999
+      000099339900990099009900CC009900000099333300990066009933CC009900
+      FF00996600009966330099336600996699009966CC009933FF00999933009999
+      6600999999009999CC009999FF0099CC000099CC330066CC660099CC990099CC
+      CC0099CCFF0099FF000099FF330099CC660099FF990099FFCC0099FFFF00CC00
+      000099003300CC006600CC009900CC00CC0099330000CC333300CC336600CC33
+      9900CC33CC00CC33FF00CC660000CC66330099666600CC669900CC66CC009966
+      FF00CC990000CC993300CC996600CC999900CC99CC00CC99FF00CCCC0000CCCC
+      3300CCCC6600CCCC9900CCCCCC00CCCCFF00CCFF0000CCFF330099FF6600CCFF
+      9900CCFFCC00CCFFFF00CC003300FF006600FF009900CC330000FF333300FF33
+      6600FF339900FF33CC00FF33FF00FF660000FF663300CC666600FF669900FF66
+      CC00CC66FF00FF990000FF993300FF996600FF999900FF99CC00FF99FF00FFCC
+      0000FFCC3300FFCC6600FFCC9900FFCCCC00FFCCFF00FFFF3300CCFF6600FFFF
+      9900FFFFCC006666FF0066FF660066FFFF00FF666600FF66FF00FFFF66002100
+      A5005F5F5F00777777008686860096969600CBCBCB00B2B2B200D7D7D700DDDD
+      DD00E3E3E300EAEAEA00F1F1F100F8F8F800F0FBFF00A4A0A000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFF000000FFFFFFFFFFFF0000FFFFFFFF00F7F71200
+      FFFFFFFF006E7A00FFFF00F6F7F6F71200FFFF007A6E7A00FFFF00F6F712F6F7
+      00FFFFFF006E7A00FFFF00F6FFF712F700FFFF007A6E7A00FFFFFF00F6F6F600
+      FFFFFFFF006E7A00FFFFFFFF001200FFFFFFFF007A6E7A00FFFFFFFF00F700FF
+      FFFFFF0023232300FFFFFFFF00F700FFFFFF007A7A746E2300FFFFFF00F700FF
+      FF007A7A7A7A7A742300FFFF00F70000FF00A07A6EA0A07A6E00FFFF00F700FF
+      FF00A0A06E6EA07A7400FFFF00F70000FFFF00A0A0A0A07A00FFFFFFFF00FFFF
+      FFFFFF0000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+    OnClick = KeyManagerButtonClick
+  end
+  object JoblistButton: TSpeedButton
+    Left = 110
+    Top = 291
+    Width = 25
+    Height = 24
+    Hint = 'Toggle display of job list'
+    Anchors = [akRight, akBottom]
+    Glyph.Data = {
+      4E010000424D4E01000000000000760000002800000012000000120000000100
+      040000000000D800000000000000000000001000000010000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00777777777777
+      777777000000777777777777777777000000888888888888888888000000878F
+      FFFF7FFFFFFFF80000008F8F444F7F444444F8000000878FFFFF7FFFFFFFF800
+      00008F8F444F7F444444F8000000878FFFFF7FFFFFFFF80000008F8F444F7F44
+      4444F8000000878FFFFF7FFFFFFFF80000008F8F444F7F444444F8000000878F
+      FFFF7FFFFFFFF80000008F8F444F7F444444F8000000878FFFFF7FFFFFFFF800
+      0000888888888888888888000000878F77777F77777778000000888888888888
+      888888000000777777777777777777000000}
+    OnClick = JoblistButtonClick
+  end
+  object HelpButton: TSpeedButton
+    Left = 195
+    Top = 291
+    Width = 25
+    Height = 24
+    Hint = 'Help'
+    Anchors = [akRight, akBottom]
+    Glyph.Data = {
+      F6000000424DF600000000000000760000002800000010000000100000000100
+      0400000000008000000000000000000000001000000000000000000000000000
+      8000008000000080800080000000800080008080000080808000C0C0C0000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00888888888888
+      888888888880088888888888880B308888888888880B30888888888888800888
+      88888888880B308888888888880B308888888888880B308888888888880BB308
+      888888880080BB3088888880B3080BB308888880B30880B308888880BB300BB3
+      088888880BBBBB30888888888000000888888888888888888888}
+    OnClick = HelpButtonClick
+  end
+  object KeysizeRadioGroup: TRadioGroup
+    Left = 160
+    Top = 8
+    Width = 119
+    Height = 49
+    Hint = 'PGP encryption key size'
+    Caption = 'Anonymous Key Size'
+    ItemIndex = 1
+    Items.Strings = (
+      '2048 bit dh'
+      '4096 bit dh')
+    TabOrder = 0
+  end
+  object RandKeyRadioGroup: TRadioGroup
+    Left = 284
+    Top = 8
+    Width = 133
+    Height = 49
+    Hint = 
+      'Randomly generated keys from just letters (pretty) or all charac' +
+      'ters?'
+    Caption = 'Random Channel Keys'
+    ItemIndex = 0
+    Items.Strings = (
+      'Pretty'
+      'All Chars')
+    TabOrder = 1
+  end
+  object PgpDirectoriesGroupbox: TGroupBox
+    Left = 5
+    Top = 204
+    Width = 412
+    Height = 78
+    Anchors = [akLeft, akTop, akRight]
+    Caption = 'PGP Directories'
+    TabOrder = 2
+    object Label1: TLabel
+      Left = 12
+      Top = 25
+      Width = 83
+      Height = 13
+      Hint = 
+        'Provide the full path for the PGPKeys.exe executable, or leave b' +
+        'lank to autolocate.'
+      Caption = 'Key Manager tool'
+    end
+    object Label2: TLabel
+      Left = 12
+      Top = 50
+      Width = 139
+      Height = 13
+      Hint = 
+        'Provide the directory for the keyring files you wish to use, or ' +
+        'leave blank to use PGP defaults.'
+      Caption = 'Keyring Dir (blank for default):'
+    end
+    object KeyManagerEdit: TEdit
+      Left = 104
+      Top = 20
+      Width = 297
+      Height = 21
+      Hint = 
+        'Provide the full path for the PGPKeys.exe executable, or leave b' +
+        'lank to autolocate.'
+      Anchors = [akLeft, akTop, akRight]
+      TabOrder = 0
+    end
+    object KeyringDirectoryEdit: TEdit
+      Left = 163
+      Top = 46
+      Width = 238
+      Height = 21
+      Hint = 
+        'Provide the directory for the keyring files you wish to use, or ' +
+        'leave blank to use PGP defaults.'
+      Anchors = [akLeft, akTop, akRight]
+      TabOrder = 1
+      Text = 'PgpKeys'
+    end
+  end
+  object ResetOptionsButton: TButton
+    Left = 232
+    Top = 291
+    Width = 103
+    Height = 25
+    Anchors = [akRight, akBottom]
+    Caption = 'Reset to Defaults'
+    TabOrder = 3
+    OnClick = ResetOptionsButtonClick
+  end
+  object SpeedGroupBox: TGroupBox
+    Left = 5
+    Top = 64
+    Width = 124
+    Height = 93
+    Caption = 'Transmission Speed'
+    TabOrder = 4
+    object Label3: TLabel
+      Left = 14
+      Top = 22
+      Width = 53
+      Height = 13
+      Caption = 'Bytes/Sec:'
+    end
+    object Label8: TLabel
+      Left = 10
+      Top = 46
+      Width = 56
+      Height = 13
+      Caption = 'Burst Bytes:'
+    end
+    object Label9: TLabel
+      Left = 7
+      Top = 69
+      Width = 60
+      Height = 13
+      Caption = 'Interval (ms):'
+    end
+    object SpeedEdit: TMaskEdit
+      Left = 72
+      Top = 18
+      Width = 33
+      Height = 21
+      Hint = 'Keep this low to avoid getting kicked for flooding!'
+      EditMask = '!999;0; '
+      MaxLength = 3
+      TabOrder = 0
+      Text = '300'
+    end
+    object BurstEdit: TMaskEdit
+      Left = 72
+      Top = 42
+      Width = 33
+      Height = 21
+      Hint = 'Keep this low to avoid getting kicked for flooding!'
+      EditMask = '!9999;0; '
+      MaxLength = 4
+      TabOrder = 1
+      Text = '1000'
+    end
+    object TimerEdit: TMaskEdit
+      Left = 72
+      Top = 65
+      Width = 33
+      Height = 21
+      Hint = 'Keep this low to avoid getting kicked for flooding!'
+      EditMask = '!9999;0; '
+      MaxLength = 4
+      TabOrder = 2
+      Text = '500'
+    end
+  end
+  object OkButton: TBitBtn
+    Left = 341
+    Top = 291
+    Width = 75
+    Height = 25
+    Anchors = [akRight, akBottom]
+    Caption = 'OK'
+    ModalResult = 1
+    TabOrder = 5
+    OnClick = OkButtonClick
+    Glyph.Data = {
+      DE010000424DDE01000000000000760000002800000024000000120000000100
+      0400000000006801000000000000000000001000000000000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+      3333333333333333333333330000333333333333333333333333F33333333333
+      00003333344333333333333333388F3333333333000033334224333333333333
+      338338F3333333330000333422224333333333333833338F3333333300003342
+      222224333333333383333338F3333333000034222A22224333333338F338F333
+      8F33333300003222A3A2224333333338F3838F338F33333300003A2A333A2224
+      33333338F83338F338F33333000033A33333A222433333338333338F338F3333
+      0000333333333A222433333333333338F338F33300003333333333A222433333
+      333333338F338F33000033333333333A222433333333333338F338F300003333
+      33333333A222433333333333338F338F00003333333333333A22433333333333
+      3338F38F000033333333333333A223333333333333338F830000333333333333
+      333A333333333333333338330000333333333333333333333333333333333333
+      0000}
+    NumGlyphs = 2
+  end
+  object GroupBox2: TGroupBox
+    Left = 134
+    Top = 64
+    Width = 116
+    Height = 93
+    Caption = 'Timeouts'
+    TabOrder = 6
+    object Label6: TLabel
+      Left = 7
+      Top = 21
+      Width = 58
+      Height = 13
+      Caption = 'Questions(s)'
+    end
+    object Label7: TLabel
+      Left = 5
+      Top = 45
+      Width = 59
+      Height = 13
+      Caption = 'Messages(s)'
+    end
+    object Label4: TLabel
+      Left = 28
+      Top = 69
+      Width = 36
+      Height = 13
+      Caption = 'Jobs (s)'
+    end
+    object QuestionTimeoutEdit: TMaskEdit
+      Left = 70
+      Top = 18
+      Width = 33
+      Height = 21
+      Hint = 'Timeout before closing question dialogs'
+      EditMask = '!999;0; '
+      MaxLength = 3
+      TabOrder = 0
+      Text = '60'
+    end
+    object MessageTimeoutEdit: TMaskEdit
+      Left = 70
+      Top = 42
+      Width = 33
+      Height = 21
+      Hint = 'Keep this low to avoid getting kicked for flooding!'
+      EditMask = '!999;0; '
+      MaxLength = 3
+      TabOrder = 1
+      Text = '60'
+    end
+    object TimeoutEdit: TMaskEdit
+      Left = 70
+      Top = 66
+      Width = 33
+      Height = 21
+      Hint = 'Keep this low to avoid getting kicked for flooding!'
+      EditMask = '!999;0; '
+      MaxLength = 3
+      TabOrder = 2
+      Text = '180'
+    end
+  end
+  object GroupBox3: TGroupBox
+    Left = 5
+    Top = 162
+    Width = 412
+    Height = 39
+    Caption = 'Job List '
+    TabOrder = 7
+    object AutoShowJobsCheckBox: TCheckBox
+      Left = 8
+      Top = 16
+      Width = 153
+      Height = 17
+      Caption = 'Autoshow non-empty joblist'
+      Checked = True
+      State = cbChecked
+      TabOrder = 0
+    end
+    object AutoHideJobsCheckBox: TCheckBox
+      Left = 168
+      Top = 16
+      Width = 129
+      Height = 17
+      Caption = 'Autohide empty joblist'
+      Checked = True
+      State = cbChecked
+      TabOrder = 1
+    end
+    object AutoClearJobsCheckBox: TCheckBox
+      Left = 304
+      Top = 16
+      Width = 97
+      Height = 17
+      Caption = 'Autoclear joblist'
+      Checked = True
+      State = cbChecked
+      TabOrder = 2
+    end
+  end
+  object ArmouringRadioGroup: TRadioGroup
+    Left = 5
+    Top = 8
+    Width = 150
+    Height = 49
+    Hint = 'PGP encryption key size'
+    Caption = 'Encoding/Armouring'
+    ItemIndex = 1
+    Items.Strings = (
+      'Ascii (slower)'
+      'Binary (less compatible)')
+    TabOrder = 8
+  end
+  object IncomingAnonymousRequests: TRadioGroup
+    Left = 255
+    Top = 64
+    Width = 162
+    Height = 93
+    Hint = 'How to treat incoming requests for your anonymous info'
+    Caption = 'Incoming Anonymous Requests'
+    ItemIndex = 4
+    Items.Strings = (
+      'Always Reject (silent)'
+      'Always Reject'
+      'Ask Before Hex&&Pubkey'
+      'Ask Before Pubkey Only'
+      'Always Provide')
+    TabOrder = 9
+  end
+end

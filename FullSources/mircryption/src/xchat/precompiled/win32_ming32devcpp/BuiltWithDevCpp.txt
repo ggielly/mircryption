@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------
+XChat2 is available for windows, and now (as of v2.0.21) supports dll plugins.
+
+This version of mircryption.dll was compiled using bloodshed dev-c++, a
+ fantastic free ide for windows, using the ming32 gcc compiler.  A project
+ file for recompiling the xchat plugin with dev-c++ is now provided in
+ the xchat directory.
+
+This .dll is built by Mircryption team and certified as safe.
+//---------------------------------------------------------------------------

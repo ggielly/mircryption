@@ -1,0 +1,4 @@
+; export file for use by dev-c++
+EXPORTS
+	xchat_plugin_init
+	xchat_plugin_deinit

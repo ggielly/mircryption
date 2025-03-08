@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------
+SUPER IMPORTANT!!!!!
+Please note that running psybnc on a remote pc and using encryption is a
+SEVERE security risk(!), and you will be exposing your encryption keys to
+anyone who can sniff traffic or access the computer running the psybnc if
+you do not use this properly!!!!!
+
+You should only be using psybnc encryption if you are running psybnc on the
+same computer as your client or on a lan computer (which will allow you
+to use it to mircryption-enable any irc client), or if you are using SSL to
+connect to your psybmc. 
+//---------------------------------------------------------------------------

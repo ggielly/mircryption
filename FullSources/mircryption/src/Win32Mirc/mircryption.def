@@ -1,0 +1,32 @@
+LIBRARY MIRCRYPTION
+
+EXPORTS
+	LoadDll
+	UnloadDll
+	DLLInfo
+	version
+	mc_encrypt
+	mc_decrypt
+	mc_encrypt2
+	mc_decrypt2
+	mc_setkey
+	mc_delkey
+	mc_disablekey
+	mc_enablekey
+	mc_displaykey
+	mc_listkeys
+	mc_setunlockpassphrase
+	mc_forcetopic
+	mc_setkeyfile
+	mc_iskeyunlocked
+	mc_isencrypting
+	mc_isdecrypting
+	mc_forceencrypt
+	mc_pastepad
+	mc_splitsay
+	mc_md5
+	mc_touchfile
+    DecryptString
+    EncryptString
+    FreeResultString
+    GetVersionString

@@ -1,0 +1,26 @@
+ENCRYPT [network~]password :#canale o nick
+--------------------------------------------
+ENCRYPT cripta i messaggi per un canale od una persona, per permettere
+una maggiore privacy su irc. Devi decidere una key con la persona
+con cui vuoi parlare cifrato, quindi entrambi dovrete impostare
+questa key per criptare e decriptare correttamente.
+Esempio:
+/ENCRYPT v1s1t0r :john
+If john ha anche lui impostato la stessa password per il tuo nick,
+potrete parlare criptato. Inoltre gli algoritmi di criptazione
+blowfish e idea vengono usati.
+Se stai usando ENCRYPT verso un canale, tutti gli utenti del canale
+devono impostare la stessa password.
+Esempio: 
+/ENCRYPT d0ntkn0w :#leet
+----
+Nuova crittografia di stile di mircryption/blow/fish:
+Potete invocare i nuovi modi di crittografia compatibili con
+ le adjunte del IRC di mircryption/blow/fish specificando un nuovo prefisso chiave
+ 'mcps;' o 'cbc;'
+Esempio:
+ /ENCRYPT mcps;test :#mircryption
+ /ENCRYPT cbc;test :#mircryptioncbc
+Se nessun prefisso è usato, la crittografia dello psyBNC di difetto sarà presupposta.
+----
+Vedi anche: DELENCRYPT LISTENCRYPT

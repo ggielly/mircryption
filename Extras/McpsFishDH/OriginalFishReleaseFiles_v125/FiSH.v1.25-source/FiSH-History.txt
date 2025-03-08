@@ -1,0 +1,138 @@
+mIRC v5.91/v6.03/v6.1/v6.12/v6.14 FISH-Addon v1.25 [History]
+************************************************************
+
+
+
+20.04.2004:	v1.25
+		  If you already patched your mIRC executable,
+		  you DO NOT have to do it again!
+		  #### Replace only FiSH.DLL and FiSH.mrc ####
+
+		- new Diffie-Hellman key-exchange implementation:
+		  DH1080 - using a 1080 bit prime (the old DH1024
+		  is partly left for downward compatibility, so
+		  that you are NOT able to *start* a DH1024 key-
+		  exchange, but only answer a DH1024 key-exchange
+		  request from someone else!)
+		  Read more about this issue in FiSH.txt!
+
+		- decrypting ACTION messages now works correctly
+
+		- new feature: mark outgoing (now you are able
+		  to see if your own text is sent encrypted). For
+		  maximum compatibility I recommend you to disable
+		  this feature. You can change the look by editing
+		  FiSH.mrc; search for %my_own_encrypted_text
+
+
+
+07.03.2004:	v1.24
+		- support for mIRC v6.14
+		
+		- stupid decryption bug fixed! (big parts of psyBNC
+		  logs got not decrypted and 2-5% of normal traffic)
+
+		- now decrypting "Mircryption" messages, those start
+		  with 'mcps' instead of '+OK' - you can find
+		  Mircryption at http://mircryption.sourceforge.net
+
+		- another rare crash (which was introduced in v1.22)
+		  fixed!
+
+
+
+23.01.2004:	v1.23
+		- another decryption bug fixed, occurred only with
+		  non IRC-RFC compliant servers (namely: BNC from
+		  http://www.gotbnc.com)
+
+
+
+22.01.2004:	v1.22
+		- evil crash during DH1024 key-exchange fixed!
+
+		- very rare decryption bug (hopefully) fixed!
+		  (happened especially while psyBNC log decryption)
+
+		- new options 'encrypt NOTICE' and 'encrypt ACTION'
+		  added, available in the popup menu. Decryption of
+		  both will take place, no matter you have them
+		  enabled or disabled.
+
+
+
+14.10.2003:	v1.21
+		- new option 'mark_position' added to blow.ini
+		  You can choose the position of the crypt-mark
+		  via the popup menu now (see FiSH.txt for
+		  discription and examples)
+
+		- If you receive a DH1024 public key, a query
+		  window will get opened automatically to avoid
+		  'double-keyXchange'
+
+		- using GetModuleFileName now to retrieve blow.ini
+		  path, instead of GetCurrentDirectory
+
+		- two mIRC exports added for script developers:
+		  FiSH_decrypt_msg and FiSH_encrypt_msg
+
+		- improved wrong key handling: no more garbage in
+		  status window while decrypting (broken) messages
+
+
+
+18.09.2003:	v1.2a
+		minor changes in FiSH.mrc:
+		- Auto-KeyXchange added (you can enable/disable
+		  it in the context menu)
+		- you can see the current plain-prefix in
+		  the context menu now
+
+
+
+31.08.2003:	v1.2
+		- Old Diffie-Hellman 128bit key-exchange
+		  replaced with 1024bit version. Make sure you
+		  read "Security Info" in FiSH.txt
+
+		- Diffie-Hellman 1024bit keyXchange is now
+		  available as a standalone mIRC script.
+
+
+
+15.05.2003:	v1.1
+		- all functions are now located in FiSH.DLL
+		  (you can delete all unneeded DLL files:
+		  DH.dll, blowfish.dll, libeay32.dll)
+
+
+
+12.05.2003:	v1.0a
+		- plain-prefix added
+
+		- you can set mark_encrypted=1/0 for each
+		  channel/person now (edit blow.ini manually)
+
+		  blow.ini example:
+		  ------------------
+		  [FiSH]
+		  process_incoming=1
+		  process_outgoing=1
+		  mark_encrypted=" *"
+		  plain_prefix="+p "
+
+		  [#yourchan]
+		  key=+OK wH.at\EvEr
+		  mark_encrypted=0
+		  ------------------
+
+		  In this case mark will be skipped ONLY for
+		  #yourchan
+
+
+
+11.05.2003:	v1.0
+		first release
+
+

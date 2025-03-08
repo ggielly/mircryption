@@ -1,0 +1,1 @@
+you can install the mcps.bmp as your windows bootscreen using bootxp (www.bootxp.net).

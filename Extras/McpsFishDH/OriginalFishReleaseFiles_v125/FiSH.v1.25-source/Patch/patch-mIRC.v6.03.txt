@@ -1,0 +1,120 @@
+005286F1  |> 6A 00             PUSH 0                                       ; /Flags = 0
+005286F3  |. 68 E6030000       PUSH 3E6                                     ; |BufSize = 3E6 (998.)
+005286F8  |. 8D95 14FCFFFF     LEA EDX,[LOCAL.251]                          ; |
+005286FE  |. 52                PUSH EDX                                     ; |Buffer
+005286FF  |. FF73 04           PUSH [DWORD DS:EBX+4]                        ; |Socket
+00528702  |. E8 43470300       CALL <JMP.&WSOCK32.recv>                     ; \recv
+
+
+
+
+0052879C  |. C6843D 14FCFFFF 0>MOV [BYTE SS:EBP+EDI-3EC],0
+--> 
+0052879C  E8 7F 0C 05 00 90 90 90 33 C9 89 4D FC 8D B5 14   Ë..êêê3…âM¸çµ
+
+0052879C     E8 7F580600       CALL mirc.0058E020
+
+
+
+
+
+
+0058E01A   90                  NOP
+0058E01B   90                  NOP
+0058E01C   90                  NOP
+0058E01D   90                  NOP
+0058E01E   90                  NOP
+0058E01F   90                  NOP
+0058E020   A1 0FDE5800         MOV EAX,[DWORD DS:58DE0F]
+0058E025   3D FF000000         CMP EAX,0FF
+0058E02A   7F 20               JG SHORT mirc.0058E04C
+0058E02C   68 C0E15800         PUSH mirc.0058E1C0                           ; ASCII "FiSH.DLL"
+0058E031   E8 2EECFCFF         CALL <JMP.&KERNEL32.LoadLibraryA>
+0058E036   68 C9E15800         PUSH mirc.0058E1C9                           ; ASCII "incoming"
+0058E03B   E8 ACEBFCFF         CALL <JMP.&KERNEL32.GetProcAddress>
+0058E040   85C0                TEST EAX,EAX
+0058E042   74 13               JE SHORT mirc.0058E057
+0058E044   90                  NOP
+0058E045   90                  NOP
+0058E046   90                  NOP
+0058E047   90                  NOP
+0058E048   90                  NOP
+0058E049   87F7                XCHG EDI,ESI
+0058E04B   8D8D 14FCFFFF       LEA ECX,[DWORD SS:EBP-3EC]
+0058E051   FFD0                CALL EAX
+0058E053   87F7                XCHG EDI,ESI
+0058E055   8BF8                MOV EDI,EAX
+0058E057   C6843D 14FCFFFF 00  MOV [BYTE SS:EBP+EDI-3EC],0
+0058E05F   C3                  RETN
+0058E060   90                  NOP
+0058E061   90                  NOP
+0058E062   90                  NOP
+0058E063   90                  NOP
+
+
+
+
+
+
+005794B0  46 69 53 48 2E 44 4C 4C 00 69 6E 63 6F 6D 69 6E   FiSH.DLL.incomin
+005794C0  67                                                g
+
+
+
+
+
+***outgoing
+
+00527FBE     E8 5D600600       CALL mirc.0058E020
+
+
+
+0058E0F9   0090 90909090       ADD [BYTE DS:EAX+90909090],DL
+0058E0FF   90                  NOP
+0058E100   A1 0FDE5800         MOV EAX,[DWORD DS:58DE0F]
+0058E105   3D FF000000         CMP EAX,0FF
+0058E10A   7F 1E               JG SHORT mirc.0058E12A
+0058E10C   68 C0E15800         PUSH mirc.0058E1C0                           ; ASCII "FiSH.DLL"
+0058E111   E8 4EEBFCFF         CALL <JMP.&KERNEL32.LoadLibraryA>
+0058E116   68 D2E15800         PUSH mirc.0058E1D2                           ; ASCII "outgoing"
+0058E11B   50                  PUSH EAX
+0058E11C   E8 CBEAFCFF         CALL <JMP.&KERNEL32.GetProcAddress>
+0058E121   85C0                TEST EAX,EAX
+0058E123   74 1B               JE SHORT mirc.0058E140
+0058E125   90                  NOP
+0058E126   90                  NOP
+0058E127   90                  NOP
+0058E128   90                  NOP
+0058E129   90                  NOP
+0058E12A   87F7                XCHG EDI,ESI
+0058E12C   FFD0                CALL EAX
+0058E12E   87F7                XCHG EDI,ESI
+0058E130   C3                  RETN
+0058E131   90                  NOP
+0058E132   90                  NOP
+0058E133   90                  NOP
+0058E134   90                  NOP
+0058E135   90                  NOP
+0058E136   90                  NOP
+0058E137   90                  NOP
+0058E138   90                  NOP
+0058E139   90                  NOP
+0058E13A   90                  NOP
+0058E13B   90                  NOP
+0058E13C   90                  NOP
+0058E13D   90                  NOP
+0058E13E   90                  NOP
+0058E13F   90                  NOP
+0058E140   57                  PUSH EDI
+0058E141   E8 72B4FAFF         CALL mirc.005395B8
+0058E146   59                  POP ECX
+0058E147   C3                  RETN
+0058E148   90                  NOP
+0058E149   90                  NOP
+0058E14A   90                  NOP
+0058E14B   90                  NOP
+
+90 90 90 90 90 90 A1 0F DE 58 00 3D FF 00 00 00 7F 1E 68 C0 E1 58 00 E8 4E EB FC FF 68 D2 E1 58
+00 50 E8 CB EA FC FF 85 C0 74 1B 90 90 90 90 90 87 F7 FF D0 87 F7 C3 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 57 E8 72 B4 FA FF 59 C3 90 90 90 90
+

@@ -1,0 +1,10 @@
+The MircryptedFileViewer Borland C++ program makes use of the following 3rd party components, which you will have to install to recompile.
+
+TFileDropper, http://www.workshell.co.uk/, filedrop@workshell.co.uk, Copyright ©1999-2001 Workshell Software.
+TAdvEditBtn, http://www.tmssoftware.com/adveditbtn.htm, TmsSoftware
+TAdvListView, http://www.tmssoftware.com/advlistv.htm, TmsSoftware
+PlusMemo, http://www.ecmqc.com/, Electro-Concept Mauricie
+
+All are freeware except PlusMemo.
+
+

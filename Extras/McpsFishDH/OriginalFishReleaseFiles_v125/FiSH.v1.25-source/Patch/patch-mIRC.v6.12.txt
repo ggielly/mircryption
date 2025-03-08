@@ -1,0 +1,104 @@
+0053F508     E8 F3950400       CALL mirc.00588B00
+0053F50D     90                NOP
+0053F50E     90                NOP
+0053F50F     90                NOP
+0053F510  |> 8A4404 14         |/MOV AL,[BYTE SS:ESP+EAX+14]
+
+
+
+00588B00   A1 008F5800         MOV EAX,[DWORD DS:588F00]
+00588B05   3D FF000000         CMP EAX,0FF
+00588B0A   7F 23               JG SHORT mirc.00588B2F
+00588B0C   68 F78E5800         PUSH mirc.00588EF7                           ; ASCII "FiSH.DLL"
+00588B11   FF15 34425700       CALL [DWORD DS:<&KERNEL32.LoadLibraryA>]     ; KERNEL32.LoadLibraryA
+00588B17   68 048F5800         PUSH mirc.00588F04                           ; ASCII "incoming"
+00588B1C   50                  PUSH EAX
+00588B1D   FF15 38425700       CALL [DWORD DS:<&KERNEL32.GetProcAddress>]   ; KERNEL32.GetProcAddress
+00588B23   85C0                TEST EAX,EAX
+00588B25   74 16               JE SHORT mirc.00588B3D
+00588B27   A3 008F5800         MOV [DWORD DS:588F00],EAX
+00588B2C   90                  NOP
+00588B2D   90                  NOP
+00588B2E   90                  NOP
+00588B2F   8D4C24 18           LEA ECX,[DWORD SS:ESP+18]
+00588B33   87F5                XCHG EBP,ESI
+00588B35   FFD0                CALL EAX
+00588B37   87F5                XCHG EBP,ESI
+00588B39   8BE8                MOV EBP,EAX
+00588B3B   33C0                XOR EAX,EAX
+00588B3D   C3                  RETN
+00588B3E   90                  NOP
+
+00588B00  A1 00 8F 58 00 3D FF 00 00 00 7F 23 68 F7 8E 58  °.èX.=ˇ...#h˜éX
+00588B10  00 FF 15 34 42 57 00 68 04 8F 58 00 50 FF 15 38  .ˇ4BW.hèX.Pˇ8
+00588B20  42 57 00 85 C0 74 16 A3 00 8F 58 00 90 90 90 8D  BW.Ö¿t£.èX.êêêç
+00588B30  4C 24 18 87 F5 FF D0 87 F5 8B E8 33 C0 C3 90 90  L$áıˇ–áıãË3¿√êê
+00588B40  90 90 90 90 90 90 00 00 00 00 00 00 00 00 00 00  êêêêêê..........
+
+A1 00 8F 58 00 3D FF 00 00 00 7F 23 68 F7 8E 58 00 FF 15 34 42 57 00 68 04 8F 58 00 50 FF 15 38
+42 57 00 85 C0 74 16 A3 00 8F 58 00 90 90 90 8D 4C 24 18 87 F5 FF D0 87 F5 8B E8 33 C0 C3 90 90
+90 90 90 90 90 90 00 00 00 00 00 00 00 00 00 00
+
+
+
+
+
+
+0053EDBC  |. 8D6424 00         LEA ESP,[DWORD SS:ESP]
+0053EDC0     E8 3B9E0400       CALL mirc.00588C00
+0053EDC5     90                NOP
+0053EDC6     90                NOP
+0053EDC7     90                NOP
+0053EDC8     90                NOP
+0053EDC9  |. 6A 00             PUSH 0                                       ; /Flags = 0
+
+00588C00   A1 208F5800         MOV EAX,[DWORD DS:588F20]
+00588C05   3D FF000000         CMP EAX,0FF
+00588C0A   7F 20               JG SHORT mirc.00588C2C
+00588C0C   68 F78E5800         PUSH mirc.00588EF7                           ; ASCII "FiSH.DLL"
+00588C11   FF15 34425700       CALL [DWORD DS:<&KERNEL32.LoadLibraryA>]     ; KERNEL32.LoadLibraryA
+00588C17   68 248F5800         PUSH mirc.00588F24                           ; ASCII "outgoing"
+00588C1C   50                  PUSH EAX
+00588C1D   FF15 38425700       CALL [DWORD DS:<&KERNEL32.GetProcAddress>]   ; KERNEL32.GetProcAddress
+00588C23   85C0                TEST EAX,EAX
+00588C25   74 11               JE SHORT mirc.00588C38
+00588C27   A3 208F5800         MOV [DWORD DS:588F20],EAX
+00588C2C   87EE                XCHG ESI,EBP
+00588C2E   FFD0                CALL EAX
+00588C30   87EE                XCHG ESI,EBP
+00588C32   C3                  RETN
+00588C33   90                  NOP
+00588C34   90                  NOP
+00588C35   90                  NOP
+00588C36   90                  NOP
+00588C37   90                  NOP
+00588C38   83C9 FF             OR ECX,FFFFFFFF
+00588C3B   8BFD                MOV EDI,EBP
+00588C3D   F2:AE               REPNE SCAS [BYTE ES:EDI]
+00588C3F   F7D1                NOT ECX
+00588C41   8D41 FF             LEA EAX,[DWORD DS:ECX-1]
+00588C44   C3                  RETN
+00588C45   90                  NOP
+00588C46   90                  NOP
+00588C47   90                  NOP
+
+
+
+00588BE0  00 00 00 00 00 00 00 00 90 90 90 90 90 90 90 90  ........êêêêêêêê
+00588BF0  90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90  êêêêêêêêêêêêêêêê
+00588C00  A1 20 8F 58 00 3D FF 00 00 00 7F 20 68 F7 8E 58  ° èX.=ˇ... h˜éX
+00588C10  00 FF 15 34 42 57 00 68 24 8F 58 00 50 FF 15 38  .ˇ4BW.h$èX.Pˇ8
+00588C20  42 57 00 85 C0 74 0B A3 20 8F 58 00 87 EE FF D0  BW.Ö¿t£ èX.áÓˇ–
+00588C30  87 EE C3 90 90 90 90 90 00 00 00 00 00 00 00 00  áÓ√êêêêê........
+
+A1 20 8F 58 00 3D FF 00 00 00 7F 20 68 F7 8E 58 00 FF 15 34 42 57 00 68 24 8F 58 00 50 FF 15 38
+42 57 00 85 C0 74 0B A3 20 8F 58 00 87 EE FF D0 87 EE C3 90 90 90 90 90 00 00 00 00 00 00 00 00
+
+
+
+
+0053F4D6 68 E6 03 00 00                    push    3E6h
+0053F4DB 8D 44 24 1C                       lea     eax, [esp+404h+var_3E8]
+0053F4DF 50                                push    eax
+0053F4E0 51                                push    ecx
+0053F4E1 FF 15 20 47 57 00                 call    ds:WSOCK32_16   ; recv

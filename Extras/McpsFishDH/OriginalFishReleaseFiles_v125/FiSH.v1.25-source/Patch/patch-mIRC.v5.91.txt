@@ -1,0 +1,123 @@
+v5.91
+
+0051C148 6A 00                                   push    0               ; flags
+0051C14A 68 B5 03 00 00                          push    3B5h            ; len
+0051C14F 68 2B DA 58 00                          push    offset byte_58DA2B ; buf
+0051C154 FF 35 40 BB 55 00                       push    dword_55BB40    ; s
+0051C15A E8 EB CF 02 00                          call    recv
+
+
+
+
+
+
+
+005A1C50   68 C01F5A00         PUSH MIRC32x.005A1FC0                        ; ASCII "FiSH.DLL"
+005A1C55   E8 0673FAFF         CALL <JMP.&KERNEL32.LoadLibraryA>
+005A1C5A   68 C91F5A00         PUSH MIRC32x.005A1FC9                        ; ASCII "incoming"
+005A1C5F   50                  PUSH EAX
+005A1C60   E8 7772FAFF         CALL <JMP.&KERNEL32.GetProcAddress>
+005A1C65   85C0                TEST EAX,EAX
+005A1C67   0F84 92020000       JE MIRC32x.005A1EFF
+005A1C6D   FFD0                CALL EAX
+005A1C6F   C686 2BDA5800 00    MOV [BYTE DS:ESI+58DA2B],0
+005A1C76   C3                  RETN
+
+
+
+005A1C50   A1 BB1F5A00         MOV EAX,[DWORD DS:5A1FBB]
+005A1C55   3D FF000000         CMP EAX,0FF
+005A1C5A   7F 22               JG SHORT MIRC32x.005A1C7E
+005A1C5C   68 C01F5A00         PUSH MIRC32x.005A1FC0                        ; ASCII "FiSH.DLL"
+005A1C61   E8 FA72FAFF         CALL <JMP.&KERNEL32.LoadLibraryA>
+005A1C66   68 C91F5A00         PUSH MIRC32x.005A1FC9                        ; ASCII "incoming"
+005A1C6B   50                  PUSH EAX
+005A1C6C   E8 6B72FAFF         CALL <JMP.&KERNEL32.GetProcAddress>
+005A1C71   85C0                TEST EAX,EAX
+005A1C73   0F84 86020000       JE MIRC32x.005A1EFF
+005A1C79   A3 BB1F5A00         MOV [DWORD DS:5A1FBB],EAX
+005A1C7E   FFD0                CALL EAX
+005A1C80   C686 2BDA5800 00    MOV [BYTE DS:ESI+58DA2B],0
+005A1C87   C3                  RETN
+005A1C88   90                  NOP
+
+
+005A1C50  A1 BB 1F 5A 00 3D FF 00 00 00 7F 22 68 C0 1F 5A   °ªZ.=ˇ..."h¿Z
+005A1C60  00 E8 FA 72 FA FF 68 C9 1F 5A 00 50 E8 6B 72 FA   .Ë˙r˙ˇh…Z.PËkr˙
+005A1C70  FF 85 C0 0F 84 86 02 00 00 A3 BB 1F 5A 00 FF D0   ˇÖ¿ÑÜ..£ªZ.ˇ–
+005A1C80  C6 86 2B DA 58 00 00 C3 90                        ∆Ü+⁄X..√ê
+
+A1 BB 1F 5A 00 3D FF 00 00 00 7F 22 68 C0 1F 5A 00 E8 FA 72 FA FF 68 C9 1F 5A 00 50 E8 6B 72 FA
+FF 85 C0 0F 84 86 02 00 00 A3 BB 1F 5A 00 FF D0 C6 86 2B DA 58 00 00 C3 90
+
+
+
+
+
+005A1C50   A1 0FDE5800         MOV EAX,[DWORD DS:58DE0F]
+005A1C55   3D FF000000         CMP EAX,0FF
+005A1C5A   7F 22               JG SHORT MIRC32x.005A1C7E
+005A1C5C   68 C01F5A00         PUSH MIRC32x.005A1FC0                        ; ASCII "FiSH.DLL"
+005A1C61   E8 FA72FAFF         CALL <JMP.&KERNEL32.LoadLibraryA>
+005A1C66   68 C91F5A00         PUSH MIRC32x.005A1FC9                        ; ASCII "incoming"
+005A1C6B   50                  PUSH EAX
+005A1C6C   E8 6B72FAFF         CALL <JMP.&KERNEL32.GetProcAddress>
+005A1C71   85C0                TEST EAX,EAX
+005A1C73   0F84 86020000       JE MIRC32x.005A1EFF
+005A1C79   A3 0FDE5800         MOV [DWORD DS:58DE0F],EAX
+005A1C7E   FFD0                CALL EAX                                     ; FiSH.incoming
+005A1C80   C686 2BDA5800 00    MOV [BYTE DS:ESI+58DA2B],0
+005A1C87   C3                  RETN
+
+
+
+005A1C80   8BF0                MOV ESI,EAX
+005A1C82   C686 2BDA5800 00    MOV [BYTE DS:ESI+58DA2B],0
+005A1C89   C3                  RETN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*********** outgoing:
+005A1DBD   90                  NOP
+005A1DBE   90                  NOP
+005A1DBF   90                  NOP
+005A1DC0   A1 0BDE5800         MOV EAX,[DWORD DS:58DE0B]
+005A1DC5   3D FF000000         CMP EAX,0FF
+005A1DCA   7F 1E               JG SHORT MIRC32.005A1DEA
+005A1DCC   68 C01F5A00         PUSH MIRC32.005A1FC0                         ; ASCII "FiSH.DLL"
+005A1DD1   E8 8A71FAFF         CALL <JMP.&KERNEL32.LoadLibraryA>
+005A1DD6   68 D21F5A00         PUSH MIRC32.005A1FD2                         ; ASCII "outgoing"
+005A1DDB   50                  PUSH EAX
+005A1DDC   E8 FB70FAFF         CALL <JMP.&KERNEL32.GetProcAddress>
+005A1DE1   85C0                TEST EAX,EAX
+005A1DE3   74 48               JE SHORT MIRC32.005A1E2D
+005A1DE5   A3 0BDE5800         MOV [DWORD DS:58DE0B],EAX
+005A1DEA   FFD0                CALL EAX
+005A1DEC   C3                  RETN
+005A1DED   90                  NOP
+005A1DEE   90                  NOP
+005A1DEF   90                  NOP
+
+
+005A1E2A   90                  NOP
+005A1E2B   90                  NOP
+005A1E2C   90                  NOP
+005A1E2D   56                  PUSH ESI
+005A1E2E   E8 8577F9FF         CALL MIRC32.005395B8
+005A1E33   5F                  POP EDI
+005A1E34   C3                  RETN
+005A1E35   90                  NOP
+005A1E36   90                  NOP
+005A1E37   90                  NOP
+

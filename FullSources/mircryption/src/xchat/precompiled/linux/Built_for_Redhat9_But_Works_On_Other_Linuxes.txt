@@ -1,0 +1,4 @@
+//---------------------------------------------------------------------------
+This is version 1.11.02 built by long time mircryption friend Housetier using
+ Debian Unstable, on an x86 machine, on January 10,2005, 
+//---------------------------------------------------------------------------

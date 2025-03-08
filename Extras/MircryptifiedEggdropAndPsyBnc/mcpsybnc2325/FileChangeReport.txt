@@ -1,0 +1,50 @@
+McPsybnc Comparison Report
+Produced: 4/15/2005 8:00:45 PM
+
+Mode:  Just Mismatches
+Left base folder: E:\MyDocuments\0MyFiles\Programming\MircryptionSuite\Distribution\MircryptionSuite\Extras\MircryptifiedEggdropAndPsyBnc\mcpsybnc2325\psybnc2325_orig
+Right base folder: E:\MyDocuments\0MyFiles\Programming\MircryptionSuite\Distribution\MircryptionSuite\Extras\MircryptifiedEggdropAndPsyBnc\mcpsybnc2325\mcpsybnc
+Name          Size     Modified                 Name                   Size     Modified
+-----------------------------------------------------------------------------------------------------
+help          76,148   4/15/2005 7:28:52 pm     help                   77,314   1/20/2005 7:06:34 am
++ENCRYPT.DEU  818      2/14/2005 1:11:28 pm  >> +ENCRYPT.DEU           1,232    1/17/2005 4:18:48 am
++ENCRYPT.ITA  725      2/14/2005 1:11:28 pm  >> +ENCRYPT.ITA           1,126    1/17/2005 4:14:28 am
+\ENCRYPT.TXT  688      2/14/2005 1:11:28 pm  >> \ENCRYPT.TXT           1,039    1/16/2005 5:30:16 am
+menuconf      136,582  4/15/2005 7:28:51 pm     menuconf               135,287  1/22/2005 4:07:04 pm
++help         11,074   4/15/2005 7:28:51 pm     +help                  8,426    1/20/2005 7:06:34 am
+|\CVS         2,648    4/15/2005 7:28:51 pm     |
+| +Entries    2,579    2/14/2005 1:11:28 pm  >> |
+| +Repository 22       2/14/2005 1:11:28 pm  >> |
+| \Root       47       2/14/2005 1:11:28 pm  >> |
+\menuconf.c   52,264   2/14/2005 1:11:28 pm  << \menuconf.c            53,617   4/15/2005 7:40:15 pm
+scripts       674      4/15/2005 7:28:52 pm     scripts                548      1/20/2005 7:06:34 am
+\example      535      4/15/2005 7:28:52 pm     \example               409      1/20/2005 7:06:34 am
+ \CVS         126      4/15/2005 7:28:52 pm
+  +Entries    55       2/14/2005 1:11:28 pm  >>
+  +Repository 24       2/14/2005 1:11:28 pm  >>
+  \Root       47       2/14/2005 1:11:28 pm  >>
+src           654,773  4/15/2005 7:28:52 pm     src                    748,965  2/14/2005 10:36:06 am
+|                                               +mircryption           81,664   1/22/2005 5:29:23 pm
+|                                            << |+b64stuff.cpp         6,740    1/14/2005 9:00:24 pm
+|                                            << |+b64stuff.h           1,201    1/9/2005 8:29:42 am
+|                                            << |+BlowfishCbc.cpp      23,667   1/14/2005 11:48:18 am
+|                                            << |+BlowfishCbc.h        10,143   1/14/2005 11:47:58 am
+|                                            << |+mc_blowfish.cpp      2,391    1/22/2005 5:23:35 pm
+|                                            << |+mc_blowfish.h        802      1/9/2005 7:07:40 am
+|                                            << |+newblowfish.cpp      4,893    1/10/2005 8:54:12 am
+|                                            << |+newblowfish.h        811      1/8/2005 10:00:36 pm
+|                                            << |+oldblowfish.cpp      11,882   1/8/2005 9:49:52 pm
+|                                            << |+oldblowfish.h        753      1/14/2005 8:51:30 pm
+|                                            << |+oldblowfish1.h       4,289    1/8/2005 9:56:32 pm
+|                                            << |\oldblowfish2.h       14,092   1/8/2005 9:51:36 pm
++p_client.c   73,262   2/14/2005 1:11:28 pm  << +p_client.c            77,885   4/15/2005 7:43:39 pm
+|                                            << +p_mircryptionwrap.cpp 6,385    1/23/2005 7:45:31 am
+|                                            << +p_mircryptionwrap.h   1,370    1/14/2005 11:43:08 pm
+\p_version.h  1,156    2/19/2005 12:00:02 pm << \p_version.h           1,306    4/15/2005 7:49:56 pm
+tools         35,469   4/15/2005 7:28:52 pm     tools                  37,119   1/21/2005 3:21:00 am
+\autoconf.c   13,091   2/14/2005 1:11:28 pm  << \autoconf.c            14,741   4/15/2005 7:52:32 pm
+                                             << BasedonPsybnc2325.txt  52       4/15/2005 7:35:02 pm
+config.h      1,002    2/14/2005 1:11:28 pm  << config.h               1,371    4/13/2005 7:34:35 pm
+Makefile      2,193    2/14/2005 1:11:28 pm  >> Makefile               2,248    1/16/2005 4:10:46 am
+targets.mak   3,984    2/14/2005 1:11:28 pm  << targets.mak            5,249    4/15/2005 7:37:23 pm
+-----------------------------------------------------------------------------------------------------

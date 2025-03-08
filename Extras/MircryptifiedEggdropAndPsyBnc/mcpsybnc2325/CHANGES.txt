@@ -1,0 +1,14 @@
+Updated 4/18/05
+ trying to fix for platforms which require g++ for .cpp files
+
+Updated 4/15/05
+ updated to psybnc version 2.3.2-5
+ http://www.psychoid.lam3rz.de/psyBNC2.3.2-5.tar.gz
+ a compilation error may have been caused in last updated due to a misplaces comment
+
+Updated 4/13/05
+ blackdevl found bug in config.h that prevented mircryption compilation when BLOCKDNS was set
+
+Updated 2/14/05
+ to deal properly with keys having % in them.
+ Happy valentines day.

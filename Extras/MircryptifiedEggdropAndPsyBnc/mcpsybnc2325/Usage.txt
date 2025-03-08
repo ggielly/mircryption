@@ -1,0 +1,64 @@
+//---------------------------------------------------------------------------
+INTRODUCTION:
+This is a modified version of psybnc (2.3.2-5) 
+ http://www.psychoid.lam3rz.de/psyBNC2.3.2-5.tar.gz
+ to support mircryption (and  fish/blow) encryption, including the new cbc
+ encryption keys.
+//---------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------
+UNZIPPING:
+if you unzip this in unix/linux, you may have to use the -a option
+ (unzip -a mcpsybnc.zip), in order to properly unpack the Makefile.
+//---------------------------------------------------------------------------
+
+
+//---------------------------------------------------------------------------
+USAGE:
+Set keys through psybnc as normal, but prefix keys with 'mcps;' or 'cbc;',
+ for example /encrypt mcps;test :#mircryption
+would set the key to test for channel #mircryption, using mircryption/fish/
+blow compatibility mode.  Use cbc;test for cbc mode.
+
+The 'mcps;' enabled encryption uses the +OK and is compatible with fish+blow.
+
+Quick psybnc reminder for encryption functions:
+ /encrypt KEY :#CHAN
+ /listencrypt
+ /delencrypt #
+ /bhelp encrypt
+//---------------------------------------------------------------------------
+
+
+//---------------------------------------------------------------------------
+SUPER IMPORTANT!!!!!
+Please note that running psybnc on a remote pc and using encryption is a
+SEVERE security risk(!), and you will be exposing your encryption keys to
+anyone who can sniff traffic or access the computer running the psybnc if
+you do not use this properly!!!!!
+
+You should only be using psybnc encryption if you are running psybnc on the
+same computer as your client or on a lan computer (which will allow you
+to use it to mircryption-enable any irc client), or if you are using SSL to
+connect to your psybmc. 
+//---------------------------------------------------------------------------
+
+
+//---------------------------------------------------------------------------
+OTHER CHANGES TO THE PSYBNC CODE:
+In addition to supporting mircryption encryption, i make two more changes
+ to the psybnc code.
+All code changes have been commented by me in the code (search for mouser),
+ and all changes must be activated using switches at the bottom of config.h,
+ including the enabling or disabling of the new mircryption compatible
+ encryption.
+The two changes I made allow disabling of /bwho for non admins (which i
+ prefer), and the ability to force openseel to not be compiled in even if
+ found (useful for testing).
+By default both of these new switches are not activated so that the psybnc
+ behaves as it does normally out of the box, and only mircryption support is
+ turned on by default.  Edit config.h to turn on the switches to prevent
+ nonadmin /bwho or to disable openssl compilation (remember that you MUST
+ use openssl when you are using encryption keys or run your psybnc locally
+ or you are shooting yourself in the foot by using encryption).
+//---------------------------------------------------------------------------

@@ -1,0 +1,32 @@
+##
+## Mircryption MinGW makefile
+##
+
+target   = Release/mircryption.dll
+objects  = ../mircryption.o ../mirc_dllshell.o ../DialogScript1.o \
+           ../../mc_blowfish.o ../../md5c.o ../../md5class.o ../../mircryptionclass.o
+
+CC       = gcc
+CXX      = g++
+RC       = windres
+
+cflags   = -s -Wall -O2 -fomit-frame-pointer
+cxxflags = $(cflags)
+ldflags  = $(cflags) -shared
+rcflags  =
+
+.PHONY: all clean
+
+all: $(target)
+
+$(target): $(objects)
+	$(CXX) $(ldflags) -o $@ $^ -Wl,--kill-at
+
+%.o : %.cpp
+	$(CXX) $(cxxflags) -c -o $@ $<
+
+%.o : %.rc
+	$(RC) $(rcflags) -o $@ $<
+
+clean:
+	$(RM) $(objects) $(target)

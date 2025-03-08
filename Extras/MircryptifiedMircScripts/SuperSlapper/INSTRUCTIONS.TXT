@@ -1,0 +1,52 @@
+;---------------------------------------------------------------------------
+; super slapper script, v1.0.10
+; 09/14/03
+;
+; superslapper is a mirc dialog-based addon that lets you apply random
+;  and custom slaps to people (extends mirc's built in command that
+;  generates the line "/me slaps xxx around a bit with a large trout").
+;
+; to install:
+;  just copy the entire SuperSlapper directory to your mirc directory, and
+;   from inside mirc type /load -rs SuperSlapper\superslapper.mrc
+;
+; To slap someone, right click on their nick, and choose to superslap them.
+;
+; Or you can use the following manual commands:
+;   /slap NICK to do a random slap, presenting dialog for confirmation.
+;   /slapc NICK to do a random slap with clipboard object, presenting dialog for confirmation.
+;   /slaps NICK to do a random slap without confirmation dialog.
+;   /slapall NICK to do a random slap of all users in chan.
+;   /slapallops NICK to do a random slap of all ops in chan.
+;   /slapallnonops NICK to do a random slap of all non-ops in chan.
+;
+; about slap data files:
+;   you can edit superslapper_slaplines.txt to add your own slap insults.
+;    optionally use _nick and _me and _obj1 and _obj2 etc. to define words to replace.
+;   you can edit superslapper_objects.txt to define new objects which can replace _obj?
+;   you can include blank lines and comments (start comments with //)
+;
+; you can also have multiple slaplines and object files, and you can switch
+;  between them in the dialog, useful if you want to have a file of nice
+;  things to say to your sweetheart :)
+; just make sure the files are named *lines*.txt and *objects*.txt,
+;  and put them somewhere in the same dir or a subdir of the script.
+;
+; you can launch your default editor for the currently selected slapfiles
+;  using the Edit button in the super slap dialog; after editing a file,
+;  click refresh to reload the data from a modified file.
+;---------------------------------------------------------------------------
+
+
+;---------------------------------------------------------------------------
+; history
+; 09/14/03 - v1.0.10
+;   added new menu option to slap the target of the clipboard.
+; 09/12/03 - v1.0.9
+;   added new slap+close button
+; 09/09/03 - v1.0.8
+;  fixed bug in win98 with combo boxes
+;  added ability to specify arbitrary mirc statements to perform on a line (instead of just an action)
+;   you can separate multiple statements with |
+;   you can refer to channel with _chan
+;---------------------------------------------------------------------------

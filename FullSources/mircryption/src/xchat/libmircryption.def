@@ -1,0 +1,4 @@
+; dlltool --base-file C:\DOCUME~1\renchler\LOCALS~1\Temp/cca04516.base --output-exp mircryption.exp --dllname mircryption.dll --output-def libmircryption.def --no-export-all-symbols --add-stdcall-alias --exclude-symbol=DllMainCRTStartup@12 --def mircryption.def --output-lib libmircryption.a
+EXPORTS
+	xchat_plugin_init @ 1
+	xchat_plugin_deinit @ 2

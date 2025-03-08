@@ -1,0 +1,4 @@
+gives _nick a plate of choco cookies.
+gives _nick a bottle of imported beer.
+gives _nick a free ticket to relaxation spa.
+sends _nick a fed ex package containing _obj1.

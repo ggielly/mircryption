@@ -1,0 +1,570 @@
+
+				                                                                         
+    The WA Link v1.2 mIRC Addon is a bASE crew product (03.27.2002)                
+    Offical Site - http://www.base.is/thecrew/ (New versions come here first)      
+									            
+    WARNING: This file is for those who want to modify WA Link mIRC script or DLL  
+    and might include some technical mumbo jumbo                                   	
+                                                                                   
+
+
+1.0 WA Link mIRC script general information
+1.1 mIRC Scripting
+
+2.0 Calling WA Link DLL exported functions from mIRC
+2.1 WA_Link_Stats
+2.2 WA_Link_Command
+2.3 WA_Link_Raw_Stats
+2.4 WA_Link_About     
+2.5 LoadDll           
+2.6 UnloadDll 
+
+3.0 Calling aliases from WA_Link mIRC script
+3.1 WA_Link mIRC script varibles
+
+4.0 Winamp default playlist format
+4.1 Genarating Winamp playlist in mIRC
+
+5.0 Sample WA Link addon script
+
+6.0 WA Link DLL general information
+6.1 WA Link DLL Exported functions
+6.2 Adding a exported function
+
+7.0 Sample WA_Link.dll exported function
+
+NOTE: If you just want to make you own theme it's suggested that you rather take a look
+      at readme.txt
+
+NOTE: This file is not a tutorial in how to program a DLL for mIRC or in mIRC scripting.
+
+NOTE: If you decide to send us your enhancements please say what they are. If you make
+      a complete script or addon for WA_Link.dll send it to us base@base.is so we may put
+      it on our page.
+
+NOTE: All info contained herein, except if this file has been modified, are in conjunction
+      with the official release of WA Link v1.2.  We may not be able to help you with a modified 
+      version.
+
+Credits, special thanks and copyright, See bottom of this file
+
+If you need help with something not explained in this file, the mIRC, Delphi help or on our site
+contact us at: base@base.is or come to our channel. See bottom of this file.
+
+
+
+1.0 WA Link mIRC script general information
+    
+    The WA Link script has a main alias called /wa, some alias may be called without using 
+    the /wa alias. This script runs on a DLL named WA_Link.DLL, so if you do not have this 
+    file the script will not work as intended. To make the script fully functional you have 
+    to have the /dll function unlocked.  /run is not required to be unlocked but some 
+    commands need it so they will not work if you have /run locked.  All pop-ups use the 
+    /wa command to execute so you do not need to use the pop-ups if you do not want to.  
+    All the dialogs also use the /wa command, the dialogs are infact nothing more than a more 
+    user friendly way to use WA_Link.  In conclusion:  Everything you can do with
+    a pop-up or dialog you can do with a /wa command.
+
+1.1 mIRC Scripting
+
+    mIRC scripting tutorials can be found on many webpages.  A good to start is on 
+    www.scriptaz.com , www.mircscripts.org or www.irc-source.com. Also try looking for 
+    "mIRC scripting tutorials" on the web.
+    This file will not teach you how to create a script for mIRC.
+
+    TIP! It's a good idea to write your addons in a seprate *.mrc file so you can send it 
+    to us and we can put it up on our website. (base@base.is). If you on the other hand
+    enhance the original WA_Link script (WA_Link.mrc) feel free to send it to us and earn
+    your place in the credits. But please comment what parts you made/modified 
+    so we can review it.
+
+2.0 Calling WA Link DLL exported functions from mIRC
+
+    To call a function from DLL it must be exported first, WA Link exported functions are
+    listed in section 6.1 WA Link DLL Exported functions
+    The function to call a DLL function, is /dll <filename> <procname> [data] or $dll(filename, procname, data) if
+    it returns some data.
+
+    Example:
+
+    /dll wa_link\wa_link.dll WA_Link_Command START
+    The above line starts WinAMP
+
+    Some functions might return a value. Check 2.1 to 2.6 for more info on the function you 
+    want to call.
+
+2.1 WA_Link_Stats
+
+    $dll(<path-to-wa_link.dll>, WA_Link_Stats, <path-to-theme.ini>) returns the appropriate 
+    statusline according to the theme or -1 (WinAMP not running).
+    To call stats using the default theme (In our example it is located in c:\mirc\wa_link\themes\)
+    you could use the following: 
+    set %WA.Result $dll(wa_link\wa_link.dll,WA_Link_Stats,c:\mirc\wa_link\themes\default.ini)
+    %WA.Result now holds the stats according to the theme. (In this case default.ini)
+    And to spit the info out you need a command. i.e. /say %WA.Result
+  
+2.2 WA_Link_Command
+
+    WA_Link_Command is the function called to control Winamp.
+    We use: set %WA.result $dll(<path-to-wa_link.dll>, WA_Link_Command, <command>) , and then
+    we check the variable to see if the command was successful.  The variable contains:
+    -1 - Winamp is not running, obviously no winamp command can be executed (except /wa start and /wa raw wadir).
+    -2 - This is only used with the find command, it means that the track was not found, 
+         neither ID3 tag nor filename
+
+    The list of commands follows, commands excluded are the script only commands,
+    the only commands that are listed are the ones that need a call to the DLL directly:
+
+      WRITEPL  - Makes WinAMP write the default playlist, since the automation of this 
+                 event is only when WinAMP quits.
+      PLAYLIST - Toggles the playlist on/off.
+      SHADE    - Toggles shade mode on/off.
+      PLSHADE  - Toggles playlist shade mode on/off.
+      EQ       - Toggles the equalizer window on/off.
+      OPEN     - Opens the WinAMP openfile dialog.
+      MINIMIZE - Minimizes WinAMP.
+      RESTORE  - Restrores a minimized WinAMP.  It does not work with hide.
+      SHOW     - Shows a hidden WinAMP.  It does not restore a minimized WinAMP.
+      HIDE     - Hides WinAMP.  This is not the same thing as minimize.
+      ONTOP    - Toggles WinAMP stay-ontop on/off.
+      JUMP     - Jumps to a track number and starts playing.
+      FIND     - Searches for a track.  Returns -2 if not found.  This command does not 
+                 start playing the track. The scripts alias just simulates it.
+      EOFPL    - Jumps to the last track in the playlist. (Short for End Of PlayList)
+      BOFPL    - Jumpt to the first track in the playlist. (Short for Beginning Of PlayList)
+      NEXT     - Jumps to the next track in the playlist.
+      PREV     - Jumps to the previous track in the playlist.
+      PAUSE    - Pauses or resumes playing.
+      PLAY     - Starts playing or resumes playing.
+      STOP     - Stops playing alltogether.
+      FADESTOP - Fades the volume down and then stops playing.
+      FFW5     - Skips forward 5 seconds. (Short for Fast Forward 5sec)
+      REW5     - Skips backward 5 seconds. (Short for Rewind 5sec)
+      SEEK     - This command needs to be called with a value.  Skips to a percentage into the track.
+      VOL      - This command needs to be called with a value.  Sets the volume to a percentage.
+      PAN      - This command needs to be called with a value.  Sets the panning, -100 being left, 
+                 0 being center and 100 being right.
+      SHUFFLE  - Toggles shuffle or random if you will, on/off.  Raw command can be used to check 
+                 if it is toggled on or off.
+      REPEAT   - Toggles repeat on/off. Raw command can be used to check if it is toggled on or off.
+      VISPLUG  - Starts or stops the selected visualization plug-in.
+      CLOSE    - Closes WinAMP.
+      START    - Starts/Opens WinAMP.
+
+2.3 WA_Link_Raw_Stats
+
+    The RAW command contained in the script is only a *DEMO* to show you what can be done.  
+    Of course you could write your own alias that manipulates the info in some way (see section 5.0).  
+    You could for example write an alias that posts to your active window the states 
+    of Shuffle and Repeat.
+
+    The command is: set %WA.result $dll(<path-to-wa_link.dll>, WA_Link_Raw_Stats, <command>)
+
+    The raw commands all return $false if the info was not found or WinAMP is not running (except for WADIR).
+    The raw commands are listed below:
+
+      SAMPLERATE    - Returns the samplerate of the current track in kHz 
+                        (e.g 11, 22 or 44). 1 Kilohertz (kHz) is equal to 1000 cycles per second.
+      CHANNELS      - Returns the number of channels 1 being mono 2 being stereo.
+      TRACKSIZE     - Returns the physical size of the current track in bytes. 
+                        (8 Bits = 1 Byte, 1 Kilebyte = 1024 bytes, 1 Megabyte = 1048576 Bytes) 
+      BITRATE       - Returns the bitrate the track was recorded at, in kbps. (Kilobytes per Second)
+      GETSHUFFLE    - Returns the state of shuffle. $SHUFFLE_OFF is off, $SHUFFLE_ON is on.
+      GETREPEAT     - Returns the state of repeat. $REPEAT_OFF is off, $REPEAT_ON is on.
+      WADIR         - Returns the directory of WinAMP.  The default playlist is located in this 
+                      folder named winamp.m3u.  This is the only RAW command that can be executed with winamp not running.
+      VERSION       - Returns the version of WinAMP.
+      STATE         - Returns the state of WinAMP.  
+                        $WA_PLAYING    - WinAMP is playing a track.
+                        $WA_PAUSED     - WinAMP is paused.
+                        $WA_STOPPED    - WinAMP is not playing anything.
+                        $WA_NOTRUNNING - WinAMP is not running.
+      TRACKSEC      - Returns the length of current track in seconds.  
+                        60sec = 1min, 3600sec = 60min = 1hour.
+                        This does not work as the theme variable %SECLEN.
+                        The theme variable %SECLEN is seconds past the last minute, so if the 
+                        track is 1min and 2sec, the theme variable is set to 2.
+                        TRACKSEC is the entire track in seconds, so if the track is 
+                        the same as above it would return 62.
+      POSSEC        - Returns the current position in the current track in seconds.  
+                      Also known as seconds played.  This is similar to the TRACKSEC command.
+      TRACKNO       - Returns the number of the current playing track.
+      TRACKFILENAME - Returns the full path to the current playing track.
+      FILETYPE      - Returns the type of file playing, also known as extension.
+      TITLE         - Returns the title of the current playing track.
+      ARTIST        - Returns the artist of the current playing track.
+      ALBUM         - Returns the album of the current playing track.
+      YEAR          - Returns the year of the current playing track.
+      COMMENT       - Returns the comment of the current playing track.
+      GENRE         - Returns the genre of the current playing track.
+
+
+2.4 WA_Link_About  
+
+    /dll $shortfn($mircdirWA_Link\WA_Link.dll) WA_Link_About
+
+    This command pop-ups a small about dialog.  With information about version and stuff.  
+    You can use this info to check what DLL version you have.
+   
+2.5 LoadDll 
+
+    When you use the /dll or the $dll command this function is automatically executed.  
+    This function tells mIRC whether to unload the DLL automatically or keep it in memory.
+    In this particular DLL, it is not kept in memory.
+          
+2.6 UnloadDll
+
+    If the DLL is not kept in memory it is unloaded automatically, so you do not need to worry 
+    about it.  The WA_Link DLL is NOT kept in memory so as soon as the function is run 
+    (Or command if you will), it unloads itself automatically.  if the DLL were kept in memory this
+    is where you would clean up stuff.
+
+3.0 Calling aliases from WA_Link mIRC script
+     
+    Some features don't call the WA_Link.dll directly, Following is a list of those aliases:
+
+    PLADDD   - Does not actually call the DLL but it calls WinAMP, used to add a directory.
+               This command parses the chosen directory and adds *.MP3, *.WMA, *.WAV, *.CDA and *.MID files
+               to the playlist.
+    PLADDF   - Does not actually call the DLL but it calls WinAMP, used to add a single file.
+               Since this is a single file, the extension is irrelevant.
+    PLADD    - Does not actually call the DLL but it calls WinAMP, used to add files, seperated by "
+               This command can be called with relevant path or full path, so the extension is irrelevant.
+
+    CMD      - View or change the current WA_Link Stats command.  If no parameter is sent along 
+               you get the current command, else it is sent to the parameter.
+
+    VIEWPL   - Displays a saved playlist.  This alias calls the SavePl itself so you do not need to 
+               save it seperately.
+
+    SAVEPL   - Saves the default winamp playlist into the WA_Link folder under the name Playlist.txt  
+               If you change this file, you are NOT changing the actual winamp playlist itself, and 
+               if you change the default playlist this file is not updated, you have to resave the 
+               playlist to get the up-to-date playlist.
+
+    THEME    - This command requires an additional parameter:
+               LIST           - Displays all available themes.
+               SET X          - Sets the current theme to X.  You do not specify path, but extension is required.
+               SET RANDOM     - Returns $true if the random theme feature is on else it returns $false.
+               SET RANDOM 0/1 - Sets the random theme feature on/off (1=on 0=off)
+
+    README   - This command displays the readme in a custom window, so you do not need /run to be 
+               unlocked for this to work, even though other commands might require it.
+
+    Most all commands need to be called from within the /wa alias.  E.g: /wa readme
+    All commands can be called from the /wa alias, so it is safer to do so, since they might call other aliases
+    to work properly.
+    It is safe to say that all commands are a part of the /wa alias with very few exceptions.
+
+3.1 WA_Link mIRC script varibles
+
+    Name:                - Default value and description
+    ----------------------------------------------------
+
+    %WA.Preview.FileName - c:\mirc\wa_link\themes\Default.INI
+                           This is the fullname of the theme to make the previewer work.  
+                           Most of the time this is the same as %WA.Theme, but may not always be so. This changes when a 
+                           new theme is selected in the combo-box in the wa_link-themes dialog.
+
+    %WA.Preview          - Winamp (%VERSION) is playing(Title: %TITLE)(Artist: %ARTIST)(Album: %ALBUM)(Year: %YEAR)(Genre: %GENRE)(Comment: %COMMENT)(Length: %MINLEN:%SECLEN done with %PERCENT% [|||||-----])
+                           This is the preview line sent to the preview window.
+
+    %WA.Theme            - c:\mirc\wa_link\themes\Default.INI
+                           This is the fullname of the current chosen theme.
+
+    %WA.Theme.ShortName  - Default
+                           This is the short name of the current theme (Path and extension stripped away), this is needed 
+                           to select the correct theme in the combobox when opening the theme dialog.
+
+    %WA.Theme.Random     - $false
+                           This simply tells whether WA_Link should use a random theme when 
+                           displaying stats.
+
+    %WA.Stats.Command    - /say
+                           This is the command executed when displaying winamp stats.
+    
+4.0 Winamp default playlist format
+
+    First line : #EXTM3U
+    Second line: #EXTINF:track length in seconds, Track Info
+    Third line : Full-path to the track
+
+    The second and third line are repeated for each track in the playlist.  If WinAMP is not set to 
+    read tags upon loading, then the playlist may seem incomplete since all or some #EXTINF lines may be missing, 
+    but they are either read when visible in the playlist or when the track is played.
+
+    A sample playlist that contains only 3 tracks might look as follows: 
+
+    #EXTM3U
+    #EXTINF:1460,Orbital - The Girl With The Sun In Her Head
+    K:\Media\Music\Orbital - In Sides\01-The Girl With The Sun In Her Head.mp3
+    #EXTINF:379,Orbital - P.E.T.R.O.L.
+    K:\Media\Music\Orbital - In Sides\02-P.E.T.R.O.L..mp3
+    #EXTINF:1437,Orbital - Dwr Budr
+    K:\Media\Music\Orbital - In Sides\05-Dwr Budr.mp3
+
+4.1 Genarating Winamp playlist in mIRC
+
+    You can call the ViewPl alias (Can be called seperatly from WA_Link e.g /viewpl), which saves the 
+    playlist and displays it in a custom window with some pop-ups to jump to or find a track, and add 
+    tracks.  The method we used to save the playlist was that I used the $filter command to save all the 
+    lines except the first one and those that did NOT contain the #EXTINF (In other words, I saved only 
+    the #EXTINF lines) into a temporary file called playlist.tmp.  Then I process that temporary file 
+    line by line to make it look like I wanted to.  You can view this code in the alias called SavePl 
+    (As with ViewPl it is not actually part of the WA_Link alias e.g /savepl, even though both can
+    be called as a /wa viewpl/savepl command).
+
+    A sample playlist.txt stored in the WA_Link folder that contains only 3 tracks might look as follows 
+    after ViewPL alias has generated it from the Winamp default playlist (see section 4.0): 
+
+    1. Orbital - The Girl With The Sun In Her Head [24:20]
+    2. Orbital - P.E.T.R.O.L. [6:19]
+    3. Orbital - Dwr Budr [23:57]
+
+5.0 Sample WA Link addon script
+
+    For example if we want to send our stats as our quit message there are multiple 
+    ways of doing this. Here are two ways:
+
+      Method 1. Using the DLL:
+        This method requires a theme to be in place and the DLL to be available.
+        What we do here is if there is no message sent with the quit alias we call the dll 
+        (see section 2.0) to return our stats with theme as a quit messege.  
+
+        alias quit {
+          ;If no quit message is sent with /quit then use a wa stats in quit message
+          if ($1 == $null) {
+            ;We call the "original" quit command with the stats as a message
+            quit $dll($shortfn($mircdirWA_Link\WA_Link.dll),WA_Link_Stats,$shortfn($mircdirWA_Link\Themes\Default.ini)
+          }
+          ;If a quit message is sent with /quit then use that instead
+          else {
+            quit $1-
+          }
+        }
+
+     Method 2. Using the WA Link script:
+       This method requires the WA Link script to be loaded and the themes to be in place 
+       and the DLL to be available.
+  
+       Here we never call the DLL ourselfs.  We use the power of the WA Link script to get 
+       the "normal" command and store it temporarily in a variable, and set the command 
+       to /quit.  Then we set the command back after we quit.
+
+       alias quit {
+         var %WA.Quit.Temp
+         ;If no quit message is sent with /quit then use a wa stats in quit message
+         if ($1 == $null) {
+           ;Store the normal wa stats command
+           set %WA.Quit.Temp %WA.Stats.Command
+           ;Overwrite the normal wa stats command with a /quit
+           set %WA.Stats.Command /quit
+           ;Call the wa stats
+           wa stats
+           ;Restore the normal wa stats command
+           set %WA.Stats.Command %WA.Quit.Temp 
+         }
+         ;If a quit message is sent with /quit then use that instead 
+         elseif ($1 != $null) {
+           quit $1-
+         }
+       }
+
+    Here is another example if we want send a track to other people on a special trigger in a chan. 
+    You need to call the DLL for raw info to get the current track filename (see section 2.3). The trigger 
+    is !waget and when someone says it in a channel this script sends the current track to that person.
+  
+      on *:TEXT:!waget:#: {
+        var %WA.Trackfilename.Temp  
+        set %WA.Trackfilename.Temp $shortfn($dll($shortfn($mircdirWA_Link\WA_Link.dll),WA_Link_Raw_Stats,TRACKFILENAME))
+        dcc send $nick %WA.Trackfilename.Temp
+      }
+
+    If you want to have two themes selected, and use a single alias to display either of them, the 
+    following example could be used:
+    
+      alias Stats {
+        var %Temp
+
+        ; If no parameter is sent along, then we want to set the themes
+        if $1 == $null {
+          ; Select theme number 1
+          set %Temp $sfile($mircdirwa_Link\Themes\,Pick theme 1, Set theme 1)
+          if (%Temp != $null) {
+            set %Theme1 $shortfn(%Temp)
+          }
+
+          ; Select theme number 2
+          set %Temp $sfile($mircdirwa_Link\Themes\,Pick theme 2, Set theme 2)
+          if (%Temp != $null) {
+            set %Theme2 $shortfn(%Temp)
+          }
+        }
+        ; Else we want to call the WA_Link_Stats function with the choosen themes
+        else {
+          if ($$1 == 1) {
+            ; Call the WA_Link_Stats function with the choosen themes
+            %WA.Stats.Command $dll($shortfn($mircdirWA_Link\WA_Link.dll),WA_Link_Stats,%Theme1)
+          }
+          elseif ($$1 == 2) {
+            %WA.Stats.Command $dll($shortfn($mircdirWA_Link\WA_Link.dll),WA_Link_Stats,%Theme2)
+          }
+        }
+      }
+
+    Of course the power of WA Link enables you to do much much more. If you make a cool Addon for WA Link
+    please send it to us (base@base.is) so we might put it up on our website. (http://www.base.is/thecrew/)
+
+    NOTE: These are just examples, but they work.
+
+6.0 WA Link DLL general information
+
+    The WA Link DLL was written in Delphi 5 Enterprise but it should compile under other 
+    versions of Delphi. It has 62 functions and just 6 of them exported. This is done
+    to simplify mIRC scripting, since scripters would just be calling 6 functions with 
+    different parameters.
+      
+    Q: Delphi! Why wasn't the WA Link DLL made in C/C++ a real programming language? 
+    A: Why not? It works doesn't it! Delphi isn't all just forms and databases, it can 
+       also do cool stuff like games, winamp plugins, mIRC DLL's and much more. 
+       Ofcourse we could have made the WA_Link.dll in C/C++ like most others mIRC DLL's 
+       out there. But what is the fun in doing stuff like everyone else?
+       
+    If you add/modify the WA_Link.dll and decide to send it to us, please comment what 
+    changes you made so we can review them and include it in future versions.
+
+    TIP! It's a good idea to set the output dir to your WA_Link dir under
+    mIRC, that way you don't have to copy the DLL file there everytime you recompile.
+
+6.1 WA Link DLL Exported functions
+
+    The following functions are exported:
+
+      LoadDll           - Loads the DLL
+      UnloadDll         - Unloads the DLL
+      WA_Link_About     - Display the about dialog
+      WA_Link_Stats     - Returns current track info in selected theme format
+      WA_Link_Command   - Command Winamp to do something, based on data sent with the function
+      WA_Link_Raw_Stats - Get raw info from WA Link, based on data sent with the function
+
+    Check section 2.0 for information about calling functions in mIRC
+
+6.2 Adding an exported function
+
+    Too add a exported function so it can be called from mIRC requires the function
+    to have special parameters. See below:
+
+    function FunctionName(mWnd: hWnd; aWnd: hWnd; Data: PChar; Parms: PChar;
+    Show: Boolean; NoPause: Boolean ): Integer; export; stdcall; 
+
+    (From mIRC help)
+    mWnd    - Is the handle to the main mIRC window.
+    aWnd    - Is the handle of the window in which the command is being issued, this 
+              might not be the currently active window if the command is being called 
+              by a remote script.
+    data    - Is the information that you wish to send to the DLL. On return, the DLL can 
+              fill this variable with the command it wants mIRC to perform if any.
+    parms   - Is filled by the DLL on return with parameters that it wants mIRC to use when 
+              performing the command that it returns in the data variable.
+    show    - Is FALSE if the . prefix was specified to make the command quiet, or TRUE otherwise.
+    Nopause - is TRUE if mIRC is in a critical routine and the DLL must not do anything that 
+              pauses processing in mIRC, eg. the DLL should not pop up a dialog.             
+ 
+    NOTE: The data and parms variables can each hold 900 chars maximum.
+   
+    The functin must also return a integer number. This number tells mIRC what 
+    to do with the returned data.
+
+    (From mIRC help)
+    0 means that mIRC should /halt processing
+    1 means that mIRC should continue processing
+    2 means that it has filled the data variable with a command which it wants 
+      mIRC to perform, and has filled parms with the parameters to use, if any, 
+      when performing the command.
+    3 means that the DLL has filled the data variable with the result that $dll() 
+      as an identifier should return.
+   
+    You must also add the FunctionName in the exports section at the bottom of the project
+    
+    exports
+    LoadDll,           // Loads the DLL
+    UnloadDll,         // Unloads the DLL
+    FunctionName;      // <---- Exported function.
+
+7.0 Sample WA_Link.dll exported function
+
+    This exported function commands the winamp window to go to front
+    
+    function WA_BringToFront(mWnd: hWnd; aWnd: hWnd; Data: PChar; Parms: PChar;
+    Show: Boolean; NoPause: Boolean ): Integer; export; stdcall    
+    var
+      hwndWinamp : thandle;
+    
+    begin
+      hwndWinamp := FindWindow('Winamp v1.x', nil);
+      BringWindowToTop(hwndWinamp);
+      result := 1;
+    end;
+   
+    This exported function returns the Winamp X,Y coordinates
+       
+    function WA_GetCoord(mWnd: hWnd; aWnd: hWnd; Data: PChar; Parms: PChar;
+    Show: Boolean; NoPause: Boolean ): Integer; export; stdcall    
+    var
+      hwndWinamp : thandle;
+      AreaRect   : TRect;
+      Coords     : PChar;
+       
+    begin
+      hwndWinamp := FindWindow('Winamp v1.x', nil);
+   
+      GetWindowRect(hwndWinamp,AreaRect);
+   
+      Coords := PChar('x:'+inttostr(AreaRect.Left) + ' y:' + inttostr(AreaRect.Top));
+
+      strcopy(data, Coords);
+      result := 3; 
+    end; 
+   
+    NOTE: Remember to add functions in exports section. See Section 6.2
+   
+
+
+WA Link is a freeware and everyone are free to distribute it and to use WA_Link 
+(.dll or .mrc) as they see fit, without having to include any of the original
+files or credits. But if you decide to distribute a modified WA_Link (.dll or .mrc)
+an E-mail would be very much appreciated (base@base.is).
+
+Even though this addon should not be able to damage anything in your or other computers,
+we cannot be held responsible if so unlikely this would happen. This addon is provided 
+"as is" and is to be used on the users own responsibilty. 
+
+Credits:
+WA_Link v1.2 was made by the bASE Crew
+DLL programming : Sveinn Steinarsson
+mIRC scripting  : Bergþór Olivert Thorstensen
+Documentation   : Bergþór Olivert Thorstensen and Sveinn Steinarsson
+
+Official IRC channel #base.is on gamers-net.com
+USA Server    : us1.gamers-net.com channel: #base.is
+Europe Server : dk1.gamers-net.com channel: #base.is
+
+Offical Site http://www.base.is/thecrew/
+
+Special thanks : MrBucket                    : Testing WA Link and coming up with ideas for it
+                 DelphiGiz                   : Advertising WA Link and supporting the WA Link project
+                 Barnuts                     : Coming up with ideas for WA Link and advertising it
+                 _]kAtO[_                    : Translating the default WA Link theme to Italian
+                 Svolfluga                   : Translating the default WA link theme to French
+                 Punchbag                    : Testing WA Link
+                 René Rosenlund              : Coming up with ideas for WA Link and advertisting it
+                 Lasse Ruud                  : Bug reporting
+                 Phish                       : Coming up with ideas for WA Link
+                 Karma                       : Advertisting and testing WA Link
+                 DiGiT                       : Testing
+
+
+Winamp is a trademark of the Nullsoft, Inc.
+mIRC is a trademark of the mIRC co. Ltd.
+Delphi is a trademark of the Inprise, Inc.
+WA_Link is not a trademark. If it were, it would be a trademark of the bASE crew.

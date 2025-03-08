@@ -1,0 +1,53 @@
+//---------------------------------------------------------------------------
+Mircryption Fixes for BrotBueXes URL-Catcher (March 2003), v0.17 , from mircscripts.org
+Note that this fix does *NOT* cause bb urlcatcher to store urls in encrypted
+ form, they are still stored in a text file in plaintext form!!!!
+The only thing this does is lets bb-urlcatcher catch urls in decrypted text.
+//---------------------------------------------------------------------------
+
+
+
+//---------------------------------------------------------------------------
+; THIS IS ALL YOU NEED TO DO TO MAKE THE SCRIPT CATCH DECRYPTED URLS
+; YOU CAN EVEN PLACE THIS IN YOUR OWN SCRIPT FILE.
+
+on *:SIGNAL:MircryptionSignal: {
+  ; catch mircryption decrypted incoming text and check it for urls
+  ; $1 = event type (text,notice,action,join,topic,part,kick,quit,nick,mode)
+  ; $2 = target ($chan)
+  ; $3 = speaker ($nick)
+  ; $4- = decrypted text
+  bb-url-catch $4-
+}
+//---------------------------------------------------------------------------
+
+
+
+//---------------------------------------------------------------------------
+; THESE ARE NOT CHANGES FOR MIRCRYPTION, BUT FOR THE BROWSER_SWITCH SCRIPT I USE
+
+; I MODIFIED THIS ALIAS IN THE SCRIPT
+alias bb-url-catcher-urlopen {
+  if ( %bb-url-catcher-urlopenrun != $null ) && ( $event != $null ) {
+    if ( $input(Do you really want to open $iif($len($1) > 40,$left($1,40) $+ ...,$1) via /run? This will execute the url on system!,ywsa,@BB-URL-Catcher,Really open URL via /run?) == $true ) run $1
+  }
+  else {
+    ; ATTN call this replacement url function so we can redirect it
+    bbMyCustom_url $+($iif(%bb-url-catcher-urlopennew != $null || %bb-url-catcher-urlopenactivate != $null,-),$iif(%bb-url-catcher-urlopennew != $null,n),$iif(%bb-url-catcher-urlopenactivate != $null,a)) $1-
+  }
+  :end
+}
+
+; AND ADDED THIS ONE
+alias bbMyCustom_url {
+  ; just invoke the /url command by default, or a browserswitch version if the /http version is available
+  if ($isalias(http)) {
+; use the http command from browserswitch
+    .http $1-
+  }
+  else {
+; normal url launch
+    .url $1-
+  }
+}
+//---------------------------------------------------------------------------

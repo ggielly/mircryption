@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{04e53642-fa9d-4417-a1f5-a7932ae1f3cf}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{6963b684-8589-4f89-a5d0-fe5402bf2f48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{785c7827-16e8-4f86-9b7f-f4384a19d015}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Header Files\coreh">
+      <UniqueIdentifier>{7ebaaf09-94f6-4c90-a99c-753bc9dc82d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{6dc9bd62-487c-48c0-958a-f95ba31a621c}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\mirc_dllshell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mircryption.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simpleexports.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\b64stuff.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\BlowfishCbc.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mc_blowfish.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\md5c.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\md5class.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mircryptionclass.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\newblowfish.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\oldblowfish.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\mirc_dllshell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mircryption.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mircryption_resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simpleexports.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\b64stuff.h">
+      <Filter>Header Files\coreh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\BlowfishCbc.h">
+      <Filter>Header Files\coreh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mc_blowfish.h">
+      <Filter>Header Files\coreh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\md5c.h">
+      <Filter>Header Files\coreh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\md5class.h">
+      <Filter>Header Files\coreh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\md5global.h">
+      <Filter>Header Files\coreh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mircryptionclass.h">
+      <Filter>Header Files\coreh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\newblowfish.h">
+      <Filter>Header Files\coreh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\oldblowfish1.h">
+      <Filter>Header Files\coreh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\oldblowfish2.h">
+      <Filter>Header Files\coreh</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\mircryption.def">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\DialogScript1.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\passpic.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

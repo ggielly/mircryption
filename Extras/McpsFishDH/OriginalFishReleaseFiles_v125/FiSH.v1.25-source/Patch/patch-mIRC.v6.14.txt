@@ -1,0 +1,103 @@
+code cave call:
+
+00548E88    74 24                JE SHORT mirc.00548EAE
+00548E8A    90                   NOP
+00548E8B    E8 70630300          CALL mirc.0057F200
+00548E90    90                   NOP
+00548E91    90                   NOP
+00548E92    90                   NOP
+00548E93    8BCE                 MOV ECX,ESI
+00548E95    E8 266FF9FF          CALL mirc.004DFDC0
+
+
+0057F1FF    90                   NOP
+0057F200    A1 F0BF5900          MOV EAX,DWORD PTR DS:[59BFF0]
+0057F205    3D FF000000          CMP EAX,0FF
+0057F20A    7F 24                JG SHORT mirc.0057F230
+0057F20C    68 00F65700          PUSH mirc.0057F600                               ; ASCII "FiSH.DLL"
+0057F211    FF15 C8015800        CALL DWORD PTR DS:[<&KERNEL32.LoadLibraryA>]     ; KERNEL32.LoadLibraryA
+0057F217    68 0CF65700          PUSH mirc.0057F60C                               ; ASCII "incoming"
+0057F21C    50                   PUSH EAX
+0057F21D    FF15 7C025800        CALL DWORD PTR DS:[<&KERNEL32.GetProcAddress>]   ; KERNEL32.GetProcAddress
+0057F223    85C0                 TEST EAX,EAX
+0057F225    74 21                JE SHORT mirc.0057F248
+0057F227    A3 F0BF5900          MOV DWORD PTR DS:[59BFF0],EAX
+0057F22C    90                   NOP
+0057F22D    90                   NOP
+0057F22E    90                   NOP
+0057F22F    90                   NOP
+0057F230    BB 1406FEAF          MOV EBX,AFFE0614
+0057F235    56                   PUSH ESI
+0057F236    57                   PUSH EDI
+0057F237    50                   PUSH EAX
+0057F238    57                   PUSH EDI
+0057F239    FF15 44015800        CALL DWORD PTR DS:[<&KERNEL32.lstrlenA>]         ; KERNEL32.lstrlenA
+0057F23F    8BF0                 MOV ESI,EAX
+0057F241    58                   POP EAX
+0057F242    8BCF                 MOV ECX,EDI
+0057F244    FFD0                 CALL EAX
+0057F246    5F                   POP EDI
+0057F247    5E                   POP ESI
+0057F248    8BCF                 MOV ECX,EDI
+0057F24A    8BD6                 MOV EDX,ESI
+0057F24C    E8 6FBCF3FF          CALL mirc.004BAEC0
+0057F251    33DB                 XOR EBX,EBX
+0057F253    C3                   RETN
+0057F252    90                   NOP
+
+A1 F0 BF 59 00 3D FF 00 00 00 7F 24 68 00 F6 57 00 FF 15 C8 01 58 00 68 0C F6 57 00 50 FF 15 7C
+02 58 00 85 C0 74 21 A3 F0 BF 59 00 90 90 90 90 BB 14 06 FE AF 56 57 50 57 FF 15 44 01 58 00 8B
+F0 58 8B CF FF D0 5F 5E 8B CF 8B D6 E8 6F BC F3 FF 33 DB C3
+
+
+
+
+
+005484B7    E8 94FDFFFF          CALL mirc.00548250
+005484BC    E8 BF6D0300          CALL mirc.0057F280
+005484C1    8A08                 MOV CL,BYTE PTR DS:[EAX]
+005484C3    40                   INC EAX
+005484C4    84C9                 TEST CL,CL
+005484C6   ^75 F9                JNZ SHORT mirc.005484C1
+
+0057F27F    90                   NOP
+0057F280    A1 F4BF5900          MOV EAX,DWORD PTR DS:[59BFF4]
+0057F285    3D FF000000          CMP EAX,0FF
+0057F28A    7F 23                JG SHORT mirc.0057F2AF
+0057F28C    68 00F65700          PUSH mirc.0057F600                               ; ASCII "FiSH.DLL"
+0057F291    FF15 C8015800        CALL DWORD PTR DS:[<&KERNEL32.LoadLibraryA>]     ; KERNEL32.LoadLibraryA
+0057F297    68 18F65700          PUSH mirc.0057F618                               ; ASCII "outgoing"
+0057F29C    50                   PUSH EAX
+0057F29D    FF15 7C025800        CALL DWORD PTR DS:[<&KERNEL32.GetProcAddress>]   ; KERNEL32.GetProcAddress
+0057F2A3    85C0                 TEST EAX,EAX
+0057F2A5    74 1B                JE SHORT mirc.0057F2C2
+0057F2A7    A3 F4BF5900          MOV DWORD PTR DS:[59BFF4],EAX
+0057F2AC    90                   NOP
+0057F2AD    90                   NOP
+0057F2AE    90                   NOP
+0057F2AF    90                   NOP
+0057F2B0    90                   NOP
+0057F2B1    90                   NOP
+0057F2B2    90                   NOP
+0057F2B3    90                   NOP
+0057F2B4    90                   NOP
+0057F2B5    90                   NOP
+0057F2B6    87EE                 XCHG ESI,EBP
+0057F2B8    FFD0                 CALL EAX
+0057F2BA    87EE                 XCHG ESI,EBP
+0057F2BC    90                   NOP
+0057F2BD    90                   NOP
+0057F2BE    90                   NOP
+0057F2BF    90                   NOP
+0057F2C0    90                   NOP
+0057F2C1    90                   NOP
+0057F2C2    8BC5                 MOV EAX,EBP
+0057F2C4    8D50 01              LEA EDX,DWORD PTR DS:[EAX+1]
+0057F2C7    C3                   RETN
+0057F2C8    90                   NOP
+0057F2C9    90                   NOP
+
+A1 F4 BF 59 00 3D FF 00 00 00 7F 23 68 00 F6 57 00 FF 15 C8 01 58 00 68 18 F6 57 00 50 FF 15 7C
+02 58 00 85 C0 74 1B A3 F4 BF 59 00 90 90 90 90 90 90 90 90 90 90 87 EE FF D0 87 EE 90 90 90 90
+90 90 8B C5 8D 50 01 C3 90 90 90 90 90 90 90 90
+

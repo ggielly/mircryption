@@ -1,0 +1,260 @@
+mIRC v5.91/v6.03/v6.1/v6.12/v6.14 FISH-Addon v1.25
+**************************************************
+
+
+This is an encryption addon for mIRC, it is based on blowfish and is
+fully compatible to original 'blowcrypt' script. It supports private
+chat and channel encryption. A secure key-exchange system is included
+aswell. Please read the whole document, especially the 'Installation'
+section, before installing it!
+
+
+
+=============
+How it works:
+=============
+
+The main blowfish encryption and decryption is being done in a DLL
+file (FiSH.DLL). The appropriate functions are being called just
+before send() and after recv() - Yes, I am replacing the recv/send
+buffers with decrypted/encrypted text. That way it is fully INVISIBLE
+to you and will NOT affect any mIRC script or function!
+
+Unfortunately it is not possible to do this by only using a mIRC script,
+because it is not powerful enough for this job. Why? Well, the main
+problem is that you are not able to REPLACE the original mIRC buffer
+holding the (cipher) text with the encrypted/decrypted message, so that
+you are required to 'halt' the original event (sent/receive), encrypt
+or decrypt the message and finally send/display the new (cipher/plain)
+text. The result is incompatibilty within other mIRC scripts and mIRC
+features. Another point is the performance loss, the mIRC DLL handling
+is not very fast.
+
+
+The key-handling is still located in a mIRC script (FiSH.mrc). You
+can set/remove/show keys via popup menues as you are used from
+original blowcrypt. You will find some configuration items there too.
+
+
+P.S.: Your psyBNC private logs will get decrypted aswell :)
+
+
+
+==============
+Security Info:
+==============
+
+What happened to DH1024 key-exchange you may ask. To make it short: An
+implementation flaw in the code has been found and a new key-exchange
+using Diffie-Hellman 1080 bit has been introduced. The implementation
+flaw is NOT about a remote vulnerability, it is rather about maths :)
+
+The analysis of a friend has come to the conclusion: The old DH1024
+key-exchange was probably still as secure as 991 bit. We cannot say
+for sure. The characteristic of the implementation flaw makes it hard
+to analyze, as not many material about this subject is available.
+
+I was very angry when this problem was discovered, but I can't change
+what happened now. Such a stupid mistake, unnoticed almost a year.
+Well, everyone learns from mistakes ...
+
+
+Make sure you NEVER exchange keys plain-text over IRC/ftp/email! If
+you ever do that, or someone else who owns that key, you might aswell
+just keep talking plain-text.
+Use the new Diffie-Hellman (1080 bit) keyXchange function!
+
+You might think this is crazy, but keep in mind: You are using IRC
+encryption because you think someone might be able to read your
+conversations. Such a person may not only have enough skills for
+that, but also for defeating your weak encryption mechanism, including
+passwords sent in plain-text and maybe even using DH-128.
+
+
+While rewriting the Diffie-Hellman key-exchange, it was discovered
+that the used 128bit numbers in DH.dll (written by sinner?) are not
+nearly secure enough for key-exchange!
+
+It would take just approx. 3 hours to calculate someones private key
+by having only the transmitted public key, on a 1.7 GHz machine with
+256 MB RAM!
+
+Now half of the time is used for pre-computation, which needs to be
+done only once. And from that point you can calculate any private key
+generated with the DH.dll in only 1.5 hours!
+
+This applies to *all* DH key-exchange plug-ins using 128bit keys! It
+is suggested to use at least 512bit for Diffie-Hellman.
+
+
+Therefore keyXchange with Diffie-Hellman in this addon was upgraded
+to 1080bit. It is not compatible to the old DH keyXchange with 128bit!
+
+The DH routines are now located in FiSH.DLL and have been completly
+rewritten using MIRACL. (Thanx to mac for discovering the weakness of
+DH128 and helping me!)
+
+
+
+=============
+Installation:
+=============
+
+- If you upgrade from a prior FiSH version, you need to replace
+  FiSH.DLL and FiSH.mrc ONLY (no need to apply the patch again)!
+
+- Unload ALL old blowcrypt files (ALT+R: blow.mrc, blowcrypt.mrc etc.)
+- You can delete the old unneeded files: DH.dll blowfish.dll libeay32.dll
+- Keep your old blow.ini!
+
+- Place FiSH.DLL, FiSH.mrc (and your old blow.ini) into same directory
+  as mIRC.exe!
+- Load FiSH.mrc into mIRC (ALT+R, File->Load->Script)
+- close mIRC
+- apply the appropriate patch (mIRC.vX.X.FISH-Addon.v1.0.exe)
+
+- *IMPORTANT* add this to blow.ini (WITHOUT the comments!):
+  ---------------------------------------------------------
+  [FiSH]
+  process_incoming=1		--> decrypt incoming messages?
+  process_outgoing=1		--> encrypt outgoing messages?
+  mark_encrypted=" ·"		--> see below
+  mark_position=1		--> 1=append mark at the end
+  				    2=prefix crypt-mark
+  				    0=disable crypt-mark
+  plain_prefix="+p "		--> messages starting with +p will be
+  				    sent plain-text
+  -------------------
+
+- If you want to mark INCOMING encrypted messages, add mark_encrypted
+  to blow.ini, in [FiSH] section.
+  Suffix Examples:
+  mark_position=1
+  mark_encrypted=" *"		--> ...end of message *
+  mark_encrypted=" ·"		--> ...end of message ·
+  mark_encrypted=" 12·"	--> ...end of message ·[blue+bold]
+  mark_encrypted=		--> disabled
+
+  Prefix Examples:
+  mark_position=2
+  mark_encrypted="· "		--> · start of message...
+  mark_encrypted="12> "	--> [blue+bold]> start of message...
+  mark_encrypted="12· "	--> [blue+bold]· start of message...
+
+- Set mark_encrypted=0 for #yourchan (in blow.ini) if you don't want
+  the crypt-mark to be shown there
+
+- if you want to see whether your own text is sent encrypted or plain,
+  you can try the 'mark outgoing' feature. You can change the look by
+  editing FiSH.mrc; search for %my_own_encrypted_text
+
+  For maximum compatibility I recommend you to disable this feature
+  (or even delete the whole section from FiSH.mrc)
+
+- If you want to perform DH1080 keyXchange each time a new query window
+  opens, enable 'Auto-KeyXchange' in the context menu.
+  
+  This will work for 'known' people, those you already had a key set
+  for, but also if the opening query starts with "+OK" (encrypted, but
+  no key set or nick changed).
+
+
+
+====================================
+Standalone DH1080 keyXchange script:
+====================================
+
+Since some of you might not want to use this addon and stay with the
+blowcrypt script by sinner (or any other), it is still recommended to
+use the new Diffie-Hellman 1080bit keyXchange feature! Which is now
+available as a standalone mIRC script.
+
+If you are using a very old blowcrypt script, which stores the keys
+plain-text in the blow.ini use DH1080-P.mrc, else use DH1080.mrc ...
+
+
+- Place FiSH.DLL and DH1080.mrc into same directory as mIRC.exe
+  (Your blow.ini should be located in same directory and not something
+  like mIRC/addons!)
+- You DON'T have to patch anything!
+- Load DH1080.mrc into mIRC (ALT+R, File->Load->Script)
+
+- Make sure you have only ONE script (DH1080.mrc or DH1080-P.mrc) loaded!
+
+- If you want to perform DH1080 keyXchange each time a new query window
+  opens, enable 'Auto-KeyXchange' in the context menu.
+  
+  This will work for 'known' people, those you already had a key set
+  for, but also if the opening query starts with "+OK" (encrypted, but
+  no key set or nick changed).
+
+
+Now go and make sure all your friends upgrade too :)
+
+
+
+================
+Technical notes:
+================
+
+For Diffie-Hellman key-exchange a 1080bit germain prime is used, the
+generator g=2 renders a field Fp from 1 to p-1. Therefore breaking it
+means to solve a discrete logarithm problem with no less than 1080bit.
+
+Base64 format is used to send the public keys over IRC.
+
+The calculated secret key is hashed with SHA-256, the result is converted
+to base64 for final use with blowfish.
+
+
+Some words about the used pseudo random number generator from the author:
+
+"This PRNG is based on Serpent, SHA-1 and RIPE-MD 160. The way it is
+designed it is as strong as Serpent-160 CFB. The two hashes are chained
+in case of one hashes appears to have properties that makes its output
+guessable. I did not chain two ciphers for performance reasons.
+
+The implementation of the cryptographic algorithms have been tested
+against test vectors. The hashes are optimized in assembly language
+whereas Serpent uses the standard implementation compiled with ICC8.
+
+How it works:
+It initially gathers entropy from various system data and adds it to a
+pool that gets hashed by SHA-1 and RIPE-MD 160. The pool is then hashed
+(by SHA-1 & RIPE-MD 160) and a 160 bit Serpent key is then expanded.
+
+While the program is running, it will make calls to a function of the
+PRNG that uses a low level timer to add entropy to the pool. When the
+pool is filled, it is mixed.
+
+When you request random data to the PRNG, a buffer is ciphered with
+Serpent in CFB mode. After a certain amount of generated bytes, the key
+is considered "expired" and a new one is derivated from the hash of the
+current pool.
+
+The PRNG can save its state. It will save the pool, add entropy to it
+and hash it. What is on disk is always different from what is in memory.
+The next time it is started, it will load it, add entropy to it, and
+hash it. If an attacker gains access to the PRNG state, the PRNG becomes
+as strong as when no file was present."
+
+
+
+
+==========
+TODO List:
+==========
+
+- custom password to encrypt keys in blow.ini
+  (temporary solution: hexedit FiSH.DLL)
+- option for wrapping long messages (bad idea)
+- if there is demand for other mIRC versions, let me know
+- write proper documentation
+
+Comments and suggestions are welcome!
+
+
+
+20. April 2004
+
+

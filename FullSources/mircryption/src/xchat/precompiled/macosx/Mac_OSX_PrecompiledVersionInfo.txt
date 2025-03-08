@@ -1,0 +1,8 @@
+//---------------------------------------------------------------------------
+this is mircryption 1.11.02 built by mouser on January 10,2005,
+ using the awesome pearpc emulator, running mac OSX, and tested to work
+ on a real MacOSX :)
+
+want to compile your own version?  you can get devtools from
+ connect.apple.com by signing up for an account and it's free.
+//---------------------------------------------------------------------------
